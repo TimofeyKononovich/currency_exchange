@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import java.lang.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
@@ -9,10 +10,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.control.Button?>
 
-
-<AnchorPane id="First_Window" fx:id="First_Window" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="566.0" prefWidth="639.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane id="First_Window" fx:id="First_Window" maxHeight="566.0" maxWidth="639.0" minHeight="566.0" minWidth="639.0" prefHeight="566.0" prefWidth="639.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <MenuBar fx:id="Menu" layoutY="-2.0" prefHeight="32.0" prefWidth="639.0">
+      <MenuBar fx:id="Menu" blendMode="DARKEN" layoutX="-7.0" prefHeight="566.0" prefWidth="639.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
           <Menu fx:id="As_Manager" mnemonicParsing="false" text="Manager">
             <items>
@@ -28,5 +28,6 @@
             <Menu fx:id="Exit" mnemonicParsing="false" text="Exit account" />
         </menus>
       </MenuBar>
+      <Label fx:id="Peson" layoutX="422.0" prefHeight="40.0" prefWidth="217.0" />
    </children>
 </AnchorPane>
