@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root prefHeight="328.0" prefWidth="600.0" type="AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.currency_exchange.SetExchangeValue">
+<fx:root fx:id="SetterValue" prefHeight="328.0" prefWidth="600.0" type="AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.currency_exchange.SetExchangeValue">
    <children>
       <TextField fx:id="rubles" layoutX="73.0" layoutY="60.0" />
       <TextField fx:id="dollars" layoutX="73.0" layoutY="141.0" />

@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root fx:id="Login_Menu" prefHeight="321.0" prefWidth="406.0" type="AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.currency_exchange.Login">
+<fx:root fx:id="Reg_Menu" prefHeight="321.0" prefWidth="406.0" type="AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.currency_exchange.Reg_Menu">
    <children>
       <Button fx:id="Reg_But" layoutX="146.0" layoutY="244.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="115.0" text="Register" />
       <Label fx:id="Log_Label" layoutX="32.0" layoutY="52.0" prefHeight="21.0" prefWidth="115.0" text="Name Surname" />
