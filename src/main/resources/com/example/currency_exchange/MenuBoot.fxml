@@ -16,18 +16,22 @@
         <menus>
           <Menu fx:id="As_Manager" mnemonicParsing="false" text="Manager">
             <items>
-              <MenuItem fx:id="Man_Log" mnemonicParsing="false" text="Login as Manager" />
-                  <MenuItem fx:id="Exchange_list" mnemonicParsing="false" text="View Exchange list" />
-                  <MenuItem fx:id="Value_set" mnemonicParsing="false" text="Set Exchange value" />
+              <MenuItem fx:id="Man_Log" mnemonicParsing="false" onAction="#Log_Manager" text="Login as Manager" />
+                  <MenuItem fx:id="Exchange_list" mnemonicParsing="false" onAction="#OpenList" text="View Exchange list" />
+                  <MenuItem fx:id="Value_set" mnemonicParsing="false" onAction="#OpenSetting" text="Set Exchange value" />
                   <MenuItem fx:id="Man_Ex" mnemonicParsing="false" text="Exit Manager Account" />
             </items>
           </Menu>
-          <Menu fx:id="Exchange" mnemonicParsing="false" text="Exchange" />
-          <Menu fx:id="Log" mnemonicParsing="false" text="Login" />
-            <Menu fx:id="Reg" mnemonicParsing="false" text="Register" />
-            <Menu fx:id="Exit" mnemonicParsing="false" text="Exit account" />
+            <Menu fx:id="Client_int" mnemonicParsing="false" text="Client">
+              <items>
+                  <MenuItem fx:id="Reg" mnemonicParsing="false" onAction="#Registrate" text="Register" />
+                <MenuItem fx:id="Log" mnemonicParsing="false" onAction="#Client_log" text="Login" />
+                <MenuItem fx:id="Exchange" mnemonicParsing="false" onAction="#OpenExchanger" text="Exchange" />
+                  <MenuItem fx:id="Exit" mnemonicParsing="false" text="Exit account" />
+              </items>
+            </Menu>
         </menus>
       </MenuBar>
-      <Label fx:id="Peson" layoutX="422.0" prefHeight="40.0" prefWidth="217.0" />
+      <Label fx:id="Person" layoutX="422.0" prefHeight="40.0" prefWidth="217.0" />
    </children>
 </AnchorPane>

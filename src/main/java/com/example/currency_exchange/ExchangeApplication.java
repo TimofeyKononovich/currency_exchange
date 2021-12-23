@@ -12,9 +12,10 @@ public class ExchangeApplication extends Application {
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ExchangeApplication.class.getResource("MenuBoot.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 639,566 );
-        stage.setTitle("Hello!");
+        stage.setTitle("Currency Exchanger");
         stage.setScene(scene);
         stage.show();
+
     }
 
     public static void main(String[] args) {

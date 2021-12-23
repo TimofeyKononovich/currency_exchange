@@ -27,4 +27,6 @@ public class Reg_Menu {
     @FXML
     private TextField Name;
 
+
+
 }

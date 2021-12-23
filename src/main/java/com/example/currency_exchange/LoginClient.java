@@ -19,7 +19,7 @@ public class LoginClient {
     private Button Log_But;
 
     @FXML
-    private Label Log_Label;
+    private Label Log_Name;
 
     @FXML
     private Label Log_Pas;
