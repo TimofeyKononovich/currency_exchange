@@ -1,5 +1,6 @@
 package com.example.currency_exchange;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
@@ -10,39 +11,54 @@ import javafx.scene.layout.AnchorPane;
 public class ExchangeBar {
 
     @FXML
-    private TextField getV;
+    private MenuButton ValueIn;
 
     @FXML
-    private MenuItem Cur_RUB1;
+    private MenuItem EU_In;
 
     @FXML
-    private TextField setV;
+    private MenuButton ValueOut;
 
     @FXML
-    private MenuButton CurMenuIn;
+    private MenuItem USD_In;
 
     @FXML
-    private MenuItem CurEU;
+    private MenuItem RUB_Out;
 
     @FXML
-    private MenuItem Cur_USD1;
+    private MenuItem EU_Out;
 
     @FXML
-    private Button exchange;
+    private Button Submit;
 
     @FXML
-    private MenuItem Cur_RUB;
+    private TextField ValueTO;
 
     @FXML
-    private MenuItem CurEU1;
+    private MenuItem USD_Out;
 
     @FXML
-    private MenuButton CurMenuOut;
-
-    @FXML
-    private MenuItem Cur_USD;
+    private TextField ValueFROM;
 
     @FXML
     private AnchorPane ExchangeBar;
+
+    @FXML
+    private MenuItem RUB_In;
+
+    @FXML
+    void Exchanging(ActionEvent event) {
+
+    }
+
+    @FXML
+    void ChooseValue(ActionEvent event) {
+
+    }
+
+    @FXML
+    void GetValue(ActionEvent event) {
+
+    }
 
 }

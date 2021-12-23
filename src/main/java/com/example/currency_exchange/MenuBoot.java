@@ -60,10 +60,10 @@ public class MenuBoot {
     void Log_Manager(ActionEvent event) {
         Stage logManagerStage = new Stage();
         logManagerStage.initModality(Modality.APPLICATION_MODAL);
-        FXMLLoader logManagerFXMLLoader = new FXMLLoader(getClass().getResource("LoginManager.fxml"));
+        FXMLLoader logManagerFXMLLoader = new FXMLLoader(getClass().getResource("LoginUser.fxml"));
         Scene logManagerScene= null;
         try {
-            logManagerScene = new Scene(logManagerFXMLLoader.load(), 406.0,406.0);
+            logManagerScene = new Scene(logManagerFXMLLoader.load(), 500.0,406.0);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -78,7 +78,7 @@ public class MenuBoot {
         FXMLLoader openListFXMLLoader = new FXMLLoader(getClass().getResource("ExList.fxml"));
         Scene openListScene= null;
         try {
-            openListScene = new Scene(openListFXMLLoader.load(), 880,406.0);
+            openListScene = new Scene(openListFXMLLoader.load(), 1000,800);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -120,10 +120,10 @@ public class MenuBoot {
     void Client_log(ActionEvent event) {
         Stage loginClientStage = new Stage();
         loginClientStage.initModality(Modality.APPLICATION_MODAL);
-        FXMLLoader loginClientFXMLLoader = new FXMLLoader(getClass().getResource("Reg_Menu.fxml"));
+        FXMLLoader loginClientFXMLLoader = new FXMLLoader(getClass().getResource("LoginUser.fxml"));
         Scene loginClientScene= null;
         try {
-            loginClientScene = new Scene(loginClientFXMLLoader.load(), 406.0,406.0);
+            loginClientScene = new Scene(loginClientFXMLLoader.load(), 500.0,406.0);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="SetterValue" prefHeight="328.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.currency_exchange.SetExchangeValue">
+<AnchorPane fx:id="SetterValue" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="416.0" prefWidth="536.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.currency_exchange.SetExchangeValue">
    <children>
-      <TextField fx:id="rubles" layoutX="73.0" layoutY="60.0" />
-      <TextField fx:id="dollars" layoutX="73.0" layoutY="141.0" />
-      <TextField fx:id="euro" layoutX="73.0" layoutY="227.0" />
-      <Label fx:id="RUB_l" layoutX="377.0" layoutY="65.0" text="RUB" />
-      <Label fx:id="USD_l" layoutX="377.0" layoutY="146.0" text="USD" />
-      <Label fx:id="EU_l" layoutX="377.0" layoutY="232.0" prefHeight="21.0" prefWidth="41.0" text="EU" />
-      <Button fx:id="Setting" layoutX="268.0" layoutY="283.0" mnemonicParsing="false" text="Set" />
+      <TextField fx:id="EU_purchase" layoutX="63.0" layoutY="261.0" />
+      <TextField fx:id="purchase_USD" layoutX="63.0" layoutY="193.0" />
+      <TextField fx:id="purchase_RUB" layoutX="63.0" layoutY="132.0" />
+      <TextField fx:id="sale_RUB" layoutX="284.0" layoutY="132.0" />
+      <TextField fx:id="sale_USD" layoutX="284.0" layoutY="193.0" />
+      <TextField fx:id="sale_EU" layoutX="284.0" layoutY="261.0" />
+      <Label fx:id="purchase" layoutX="127.0" layoutY="82.0" text="purchase" />
+      <Label fx:id="sale" layoutX="365.0" layoutY="82.0" text="sale" />
+      <Label fx:id="RUB" layoutX="14.0" layoutY="137.0" text="RUB" />
+      <Label fx:id="USD" layoutX="14.0" layoutY="198.0" text="USD" />
+      <Label fx:id="EU" layoutX="14.0" layoutY="266.0" text="EU" />
+      <Button fx:id="Setting" layoutX="211.0" layoutY="339.0" mnemonicParsing="false" onAction="#Save" text="Save Currency" />
    </children>
 </AnchorPane>

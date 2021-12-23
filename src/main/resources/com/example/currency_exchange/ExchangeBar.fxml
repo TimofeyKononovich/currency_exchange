@@ -1,29 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="ExchangeBar" prefHeight="328.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.currency_exchange.ExchangeBar">
+
+<AnchorPane fx:id="ExchangeBar" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <TextField fx:id="setV" layoutX="62.0" layoutY="158.0" />
-      <TextField fx:id="getV" layoutX="344.0" layoutY="158.0" />
-      <Button fx:id="exchange" layoutX="260.0" layoutY="255.0" mnemonicParsing="false" text="Exchange" />
-      <MenuButton fx:id="CurMenuOut" layoutX="344.0" layoutY="82.0" mnemonicParsing="false" text="CurrencyOut">
+      <Button fx:id="Submit" layoutX="245.0" layoutY="315.0" mnemonicParsing="false" onAction="#Exchanging" prefHeight="31.0" prefWidth="111.0" text="Submit" />
+      <MenuButton fx:id="ValueIn" layoutX="109.0" layoutY="110.0" mnemonicParsing="false" onAction="#ChooseValue" text="ValueIn">
         <items>
-          <MenuItem fx:id="Cur_RUB" mnemonicParsing="false" text="RUB" />
-          <MenuItem fx:id="Cur_USD" mnemonicParsing="false" text="USD" />
-            <MenuItem fx:id="CurEU" mnemonicParsing="false" text="EU" />
+          <MenuItem fx:id="RUB_In" mnemonicParsing="false" text="RUB" />
+          <MenuItem fx:id="USD_In" mnemonicParsing="false" text="USD" />
+            <MenuItem fx:id="EU_In" mnemonicParsing="false" text="EU" />
         </items>
       </MenuButton>
-      <MenuButton fx:id="CurMenuIn" layoutX="62.0" layoutY="82.0" mnemonicParsing="false" text="CurrencyIn">
-         <items>
-            <MenuItem fx:id="Cur_RUB1" mnemonicParsing="false" text="RUB" />
-            <MenuItem fx:id="Cur_USD1" mnemonicParsing="false" text="USD" />
-            <MenuItem fx:id="CurEU1" mnemonicParsing="false" text="EU" />
-         </items>
+      <MenuButton fx:id="ValueOut" layoutX="375.0" layoutY="110.0" mnemonicParsing="false" onAction="#GetValue" text="ValueOut">
+        <items>
+          <MenuItem fx:id="RUB_Out" mnemonicParsing="false" text="RUB" />
+          <MenuItem fx:id="USD_Out" mnemonicParsing="false" text="USD" />
+            <MenuItem fx:id="EU_Out" mnemonicParsing="false" text="EU" />
+        </items>
       </MenuButton>
+      <TextField fx:id="ValueTO" layoutX="61.0" layoutY="200.0" />
+      <TextField fx:id="ValueFROM" layoutX="332.0" layoutY="200.0" />
    </children>
 </AnchorPane>

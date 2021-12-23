@@ -1,11 +1,13 @@
 package com.example.currency_exchange;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
-
-
 
 public class ExList {
 
@@ -13,7 +15,13 @@ public class ExList {
     private TableColumn<?, ?> Col_from;
 
     @FXML
+    private TextField Date_field;
+
+    @FXML
     private TableColumn<?, ?> Col_Date;
+
+    @FXML
+    private Label Date_Label;
 
     @FXML
     private TableColumn<?, ?> Col_Name;
@@ -22,7 +30,13 @@ public class ExList {
     private TableColumn<?, ?> Col_in;
 
     @FXML
+    private Label Date_label;
+
+    @FXML
     private TableColumn<?, ?> Col_Val;
+
+    @FXML
+    private Button ShowHistory;
 
     @FXML
     private AnchorPane ExList;
@@ -30,5 +44,12 @@ public class ExList {
     @FXML
     private TableView<?> table;
 
-}
+    @FXML
+    private TextField Client_field;
 
+    @FXML
+    void DisplayInfo(ActionEvent event) {
+
+    }
+
+}

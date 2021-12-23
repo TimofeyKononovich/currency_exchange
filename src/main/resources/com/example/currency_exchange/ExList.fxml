@@ -6,16 +6,21 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane fx:id="ExList" prefHeight="593.0" prefWidth="877.0"  xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.currency_exchange.ExList">
+<AnchorPane fx:id="ExList" prefHeight="702.0" prefWidth="999.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.currency_exchange.ExList">
    <children>
-      <TableView fx:id="table" layoutX="-6.0" layoutY="-7.0" prefHeight="600.0" prefWidth="879.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <TableView fx:id="table" layoutX="1.0" layoutY="101.0" prefHeight="492.0" prefWidth="877.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="101.0">
         <columns>
           <TableColumn fx:id="Col_Name" editable="false" prefWidth="247.0" resizable="false" sortType="DESCENDING" text="Name Surname" />
           <TableColumn fx:id="Col_Val" editable="false" minWidth="0.0" prefWidth="138.0" resizable="false" sortType="DESCENDING" text="Value" />
-            <TableColumn fx:id="Col_from" editable="false" minWidth="0.0" prefWidth="141.0" resizable="false" sortType="DESCENDING" text="Currency from" />
-            <TableColumn fx:id="Col_in" editable="false" minWidth="0.0" prefWidth="168.0" resizable="false" sortType="DESCENDING" text="Currency in" />
-            <TableColumn fx:id="Col_Date" editable="false" minWidth="0.0" prefWidth="183.0" resizable="false" sortType="DESCENDING" text="Date" />
+            <TableColumn fx:id="Col_from" editable="false" minWidth="0.0" prefWidth="189.0" resizable="false" sortType="DESCENDING" text="Currency from" />
+            <TableColumn fx:id="Col_in" editable="false" minWidth="0.0" prefWidth="195.0" resizable="false" sortType="DESCENDING" text="Currency in" />
+            <TableColumn fx:id="Col_Date" editable="false" minWidth="0.0" prefWidth="229.0" resizable="false" sortType="DESCENDING" text="Date" />
         </columns>
       </TableView>
+      <Button fx:id="ShowHistory" layoutX="437.0" layoutY="31.0" mnemonicParsing="false" onAction="#DisplayInfo" prefHeight="43.0" prefWidth="126.0" text="Display" />
+      <TextField fx:id="Date_field" layoutX="144.0" layoutY="37.0" />
+      <TextField fx:id="Client_field" layoutX="752.0" layoutY="37.0" />
+      <Label fx:id="Date_Label" layoutX="650.0" layoutY="42.0" text="Client" />
+      <Label fx:id="Date_label" layoutX="45.0" layoutY="42.0" text="Date" />
    </children>
 </AnchorPane>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="LoginView" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.currency_exchange.Login">
+   <children>
+      <Label fx:id="log_Label" layoutX="100.0" layoutY="128.0" text="Login" />
+      <Label fx:id="pass_Label" layoutX="87.0" layoutY="241.0" text="Password" />
+      <TextField fx:id="log" layoutX="224.0" layoutY="134.0" />
+      <PasswordField fx:id="pass" layoutX="224.0" layoutY="236.0" />
+      <Button fx:id="LogIn" layoutX="285.0" layoutY="317.0" mnemonicParsing="false" onAction="#LoggingMan" text="Log" />
+   </children>
+</AnchorPane>

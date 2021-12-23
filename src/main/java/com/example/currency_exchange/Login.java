@@ -1,5 +1,6 @@
 package com.example.currency_exchange;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -7,24 +8,31 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
-public class LoginClient {
+
+
+public class Login {
 
     @FXML
-    private AnchorPane Login_Menu;
+    private Label log_Label;
+
+    @FXML
+    private TextField log;
 
     @FXML
     private PasswordField pass;
 
     @FXML
-    private Button Log_But;
+    private AnchorPane LoginView;
 
     @FXML
-    private Label Log_Name;
+    private Label pass_Label;
 
     @FXML
-    private Label Log_Pas;
+    private Button LogIn;
 
     @FXML
-    private TextField Name;
+    void LoggingMan(ActionEvent event) {
+
+    }
 
 }
