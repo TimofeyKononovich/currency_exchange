@@ -6,7 +6,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<fx:root fx:id="ExList" prefHeight="593.0" prefWidth="877.0" type="AnchorPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.currency_exchange.ExchangeList">
+<AnchorPane fx:id="ExList" prefHeight="593.0" prefWidth="877.0"  xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.currency_exchange.ExList">
    <children>
       <TableView fx:id="table" layoutX="-6.0" layoutY="-7.0" prefHeight="600.0" prefWidth="879.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <columns>
@@ -18,4 +18,4 @@
         </columns>
       </TableView>
    </children>
-</fx:root>
+</AnchorPane>
