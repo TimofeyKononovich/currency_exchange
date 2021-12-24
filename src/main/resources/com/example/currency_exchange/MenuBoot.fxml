@@ -19,7 +19,7 @@
               <MenuItem fx:id="Man_Log" mnemonicParsing="false" onAction="#Log_Manager" text="Login as Manager" />
                   <MenuItem fx:id="Exchange_list" mnemonicParsing="false" onAction="#OpenList" text="View Exchange list" />
                   <MenuItem fx:id="Value_set" mnemonicParsing="false" onAction="#OpenSetting" text="Set Exchange value" />
-                  <MenuItem fx:id="Man_Ex" mnemonicParsing="false" text="Exit Manager Account" />
+                  <MenuItem fx:id="Man_Ex" mnemonicParsing="false" onAction="#ExitManager" text="Exit Manager Account" />
             </items>
           </Menu>
             <Menu fx:id="Client_int" mnemonicParsing="false" text="Client">
@@ -27,7 +27,7 @@
                   <MenuItem fx:id="Reg" mnemonicParsing="false" onAction="#Registrate" text="Register" />
                 <MenuItem fx:id="Log" mnemonicParsing="false" onAction="#Client_log" text="Login" />
                 <MenuItem fx:id="Exchange" mnemonicParsing="false" onAction="#OpenExchanger" text="Exchange" />
-                  <MenuItem fx:id="Exit" mnemonicParsing="false" text="Exit account" />
+                  <MenuItem fx:id="Exit" mnemonicParsing="false" onAction="#ExitClient" text="Exit account" />
               </items>
             </Menu>
         </menus>

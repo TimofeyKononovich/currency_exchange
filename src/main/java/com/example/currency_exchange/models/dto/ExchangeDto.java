@@ -10,11 +10,17 @@ public class ExchangeDto {
 
     private double euros;
 
-    public ExchangeDto(String login, double rubles, double dollars, double euros) {
+    private String curIn;
+
+    private String curOut;
+
+    public ExchangeDto(String login, double rubles, double dollars, double euros, String curIn, String curOut) {
         this.login = login;
         this.rubles = rubles;
         this.dollars = dollars;
         this.euros = euros;
+        this.curIn = curIn;
+        this.curOut = curOut;
     }
 
     public String getLogin() {
@@ -32,4 +38,13 @@ public class ExchangeDto {
     public double getEuros() {
         return euros;
     }
+
+    public String getCurIn() {
+        return curIn;
+    }
+
+    public String getCurOut() {
+        return curOut;
+    }
+
 }

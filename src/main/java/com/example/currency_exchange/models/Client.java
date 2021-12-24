@@ -3,6 +3,8 @@ package com.example.currency_exchange.models;
 public class Client {
     private int id;
 
+    private boolean isManager=false;
+
     private String password;
 
     private String login;

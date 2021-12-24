@@ -12,12 +12,6 @@ import javafx.scene.layout.AnchorPane;
 public class ExList {
 
     @FXML
-    private TableColumn<?, ?> Col_from;
-
-    @FXML
-    private TextField Date_field;
-
-    @FXML
     private TableColumn<?, ?> Col_Date;
 
     @FXML
@@ -33,13 +27,22 @@ public class ExList {
     private Label Date_label;
 
     @FXML
-    private TableColumn<?, ?> Col_Val;
+    private AnchorPane ExList;
+
+    @FXML
+    private TableColumn<?, ?> ValueIn;
+
+    @FXML
+    private TableColumn<?, ?> Col_from;
+
+    @FXML
+    private TableColumn<?, ?> ValueOut;
+
+    @FXML
+    private TextField Date_field;
 
     @FXML
     private Button ShowHistory;
-
-    @FXML
-    private AnchorPane ExList;
 
     @FXML
     private TableView<?> table;

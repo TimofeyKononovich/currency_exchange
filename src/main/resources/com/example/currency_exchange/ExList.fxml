@@ -11,10 +11,11 @@
       <TableView fx:id="table" layoutX="1.0" layoutY="101.0" prefHeight="492.0" prefWidth="877.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="1.0" AnchorPane.rightAnchor="-1.0" AnchorPane.topAnchor="101.0">
         <columns>
           <TableColumn fx:id="Col_Name" editable="false" prefWidth="247.0" resizable="false" sortType="DESCENDING" text="Name Surname" />
-          <TableColumn fx:id="Col_Val" editable="false" minWidth="0.0" prefWidth="138.0" resizable="false" sortType="DESCENDING" text="Value" />
-            <TableColumn fx:id="Col_from" editable="false" minWidth="0.0" prefWidth="189.0" resizable="false" sortType="DESCENDING" text="Currency from" />
-            <TableColumn fx:id="Col_in" editable="false" minWidth="0.0" prefWidth="195.0" resizable="false" sortType="DESCENDING" text="Currency in" />
-            <TableColumn fx:id="Col_Date" editable="false" minWidth="0.0" prefWidth="229.0" resizable="false" sortType="DESCENDING" text="Date" />
+          <TableColumn fx:id="ValueIn" editable="false" minWidth="0.0" prefWidth="108.0" resizable="false" sortType="DESCENDING" text="ValueIn" />
+            <TableColumn fx:id="Col_from" editable="false" minWidth="0.0" prefWidth="170.0" resizable="false" sortType="DESCENDING" text="Currency from" />
+            <TableColumn fx:id="Col_in" editable="false" minWidth="0.0" prefWidth="161.0" resizable="false" sortType="DESCENDING" text="Currency in" />
+            <TableColumn fx:id="ValueOut" editable="false" prefWidth="100.0" text="ValueOut" />
+            <TableColumn fx:id="Col_Date" editable="false" minWidth="0.0" prefWidth="212.0" resizable="false" sortType="DESCENDING" text="Date" />
         </columns>
       </TableView>
       <Button fx:id="ShowHistory" layoutX="437.0" layoutY="31.0" mnemonicParsing="false" onAction="#DisplayInfo" prefHeight="43.0" prefWidth="126.0" text="Display" />

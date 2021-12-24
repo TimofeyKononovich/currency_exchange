@@ -1,5 +1,7 @@
 package com.example.currency_exchange;
 
+import com.example.currency_exchange.models.dto.AccountDto;
+import com.example.currency_exchange.models.dto.ClientDto;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -32,7 +34,10 @@ public class Login {
 
     @FXML
     void LoggingMan(ActionEvent event) {
+        AccountDto accountDto= new AccountDto(log.getText(), pass.getText());
 
+        ClientDto clientDto;
+      //  DateHandler.client=new ();
     }
 
 }

@@ -1,6 +1,7 @@
 package com.example.currency_exchange;
 
 
+import com.example.currency_exchange.models.Manager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -58,6 +59,7 @@ public class MenuBoot {
 
     @FXML
     void Log_Manager(ActionEvent event) {
+        if(DateHandler.client==null || DateHandler.manager==null){
         Stage logManagerStage = new Stage();
         logManagerStage.initModality(Modality.APPLICATION_MODAL);
         FXMLLoader logManagerFXMLLoader = new FXMLLoader(getClass().getResource("LoginUser.fxml"));
@@ -69,10 +71,12 @@ public class MenuBoot {
         }
         logManagerStage.setScene(logManagerScene);
         logManagerStage.show();
+        }
     }
 
     @FXML
     void OpenList(ActionEvent event) {
+        if(DateHandler.manager !=null){
         Stage openListStage = new Stage();
         openListStage.initModality(Modality.APPLICATION_MODAL);
         FXMLLoader openListFXMLLoader = new FXMLLoader(getClass().getResource("ExList.fxml"));
@@ -85,9 +89,11 @@ public class MenuBoot {
         openListStage.setScene( openListScene);
         openListStage.show();
     }
+    }
 
     @FXML
     void OpenSetting(ActionEvent event) {
+        if(DateHandler.manager !=null){
         Stage setExchangeValueStage = new Stage();
         setExchangeValueStage.initModality(Modality.APPLICATION_MODAL);
         FXMLLoader setExchangeValueFXMLLoader = new FXMLLoader(getClass().getResource("SetExchangeValue.fxml"));
@@ -100,9 +106,11 @@ public class MenuBoot {
         setExchangeValueStage.setScene(setExchangeValueScene);
         setExchangeValueStage.show();
     }
+    }
 
     @FXML
     void OpenExchanger(ActionEvent event) {
+        if(DateHandler.client !=null ){
         Stage exchangeBarStage = new Stage();
         exchangeBarStage.initModality(Modality.APPLICATION_MODAL);
         FXMLLoader exchangeBarValueFXMLLoader = new FXMLLoader(getClass().getResource("exchangeBar.fxml"));
@@ -115,9 +123,11 @@ public class MenuBoot {
         exchangeBarStage.setScene(exchangeBarScene);
         exchangeBarStage.show();
     }
+    }
 
     @FXML
     void Client_log(ActionEvent event) {
+        if(DateHandler.client ==null || DateHandler.manager ==null){
         Stage loginClientStage = new Stage();
         loginClientStage.initModality(Modality.APPLICATION_MODAL);
         FXMLLoader loginClientFXMLLoader = new FXMLLoader(getClass().getResource("LoginUser.fxml"));
@@ -130,9 +140,11 @@ public class MenuBoot {
         loginClientStage.setScene(loginClientScene);
         loginClientStage.show();
     }
+    }
 
     @FXML
     void Registrate(ActionEvent event) {
+        if(DateHandler.client ==null || DateHandler.manager ==null){
         Stage regMenuStage = new Stage();
         regMenuStage.initModality(Modality.APPLICATION_MODAL);
         FXMLLoader regMenuFXMLLoader = new FXMLLoader(getClass().getResource("Reg_Menu.fxml"));
@@ -144,6 +156,22 @@ public class MenuBoot {
         }
         regMenuStage.setScene(regMenuScene);
         regMenuStage.show();
+        }
     }
 
+    @FXML
+    void ExitManager(ActionEvent event) {
+        if(DateHandler.manager!=null || DateHandler.client==null){
+            DateHandler.manager=null;
+            Person.setText("");
+        }
+    }
+
+    @FXML
+    void ExitClient(ActionEvent event) {
+        if(DateHandler.manager==null || DateHandler.client!=null){
+            DateHandler.client=null;
+            Person.setText("");
+        }
+    }
 }
