@@ -68,7 +68,6 @@ public class MenuBoot {
 
     @FXML
     void Log_Manager(ActionEvent event) {
-
         if(DateHandler.client==null && DateHandler.manager==null){
             DateHandler.isManager=true;
         Stage logManagerStage = new Stage();
@@ -162,7 +161,7 @@ public class MenuBoot {
 
     @FXML
     void Registrate(ActionEvent event) {
-        if(DateHandler.client ==null || DateHandler.manager ==null){
+        if(DateHandler.client ==null && DateHandler.manager ==null){
         Stage regMenuStage = new Stage();
         regMenuStage.initModality(Modality.APPLICATION_MODAL);
         FXMLLoader regMenuFXMLLoader = new FXMLLoader(getClass().getResource("Reg_Menu.fxml"));

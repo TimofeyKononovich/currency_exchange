@@ -2,11 +2,11 @@ package com.example.currency_exchange.models;
 
 public class Manager {
 
-    private static String Login="Ivan Petrov";
+    private static String Login="1";
 
     private static String Status="Manager";
 
-    private static String Password="1111";
+    private static String Password="1";
 
     private boolean isManger = true;
 
