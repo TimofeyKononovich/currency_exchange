@@ -22,12 +22,14 @@ sellRUB double(10,4) NOT NULL,
 sellEU double(10,4) NOT NULL,
 PRIMARY KEY(id)
 );
-
+drop table ExHistory;
 create table ExHistory (
+id int not null auto_increment,
 LoginDate varchar(255) NOT NULL,
 ValueIn double(10,4) NOT NULL,
 CurIn varchar(255) NOT NULL,
 CurOut varchar(255) NOT NULL,
 ValueOut double(10,4) NOT NULL,
-DayEx varchar(255) NOT NULL
+DayEx varchar(255) NOT NULL,
+PRIMARY KEY(id)
 );

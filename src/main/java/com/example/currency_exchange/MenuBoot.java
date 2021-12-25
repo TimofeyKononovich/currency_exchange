@@ -94,7 +94,7 @@ public class MenuBoot {
         FXMLLoader openListFXMLLoader = new FXMLLoader(getClass().getResource("ExList.fxml"));
         Scene openListScene= null;
         try {
-            openListScene = new Scene(openListFXMLLoader.load(), 1000,800);
+            openListScene = new Scene(openListFXMLLoader.load(), 1000,700);
         } catch (IOException e) {
             e.printStackTrace();
         }
