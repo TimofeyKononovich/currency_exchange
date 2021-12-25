@@ -1,5 +1,7 @@
 package com.example.currency_exchange;
 
+import com.example.currency_exchange.models.Client;
+import com.example.currency_exchange.models.Manager;
 import com.example.currency_exchange.models.dto.AccountDto;
 import com.example.currency_exchange.models.dto.ClientDto;
 import javafx.event.ActionEvent;
@@ -9,7 +11,12 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.stage.Stage;
 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 
 
 public class Login {
@@ -35,9 +42,41 @@ public class Login {
     @FXML
     void LoggingMan(ActionEvent event) {
         AccountDto accountDto= new AccountDto(log.getText(), pass.getText());
-
+        if(!DateHandler.isManager){
         ClientDto clientDto;
-      //  DateHandler.client=new ();
+        try(Connection connection=JDBCSource.getConnection()) {
+            Statement statement=connection.createStatement();
+            ResultSet resultSet=statement.executeQuery("SELECT LoginDate, Perpassword FROM members WHERE LoginDate='"+accountDto.getLogin()+"' AND Perpassword='"+accountDto.getPassword()+"'");
+            if(resultSet.next()==false){
+                connection.close();
+                System.out.println("Client is not registered");
+            }
+            else {
+            resultSet=statement.executeQuery("SELECT LoginDate, Perpassword, USD, RUB, EU FROM members WHERE LoginDate='"+accountDto.getLogin()+"'");
+            resultSet.next();
+            clientDto=new ClientDto(resultSet.getString("Perpassword"), resultSet.getString("LoginDate"),resultSet.getDouble("RUB"),resultSet.getDouble("USD"),resultSet.getDouble("EU"));
+            DateHandler.client=new Client(clientDto.getPassword(),clientDto.getLogin(),clientDto.getRubles(),clientDto.getDollars(),clientDto.getEuros());
+            connection.close();
+            Stage stage=(Stage) LogIn.getScene().getWindow();
+            stage.close();
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        }
+        else {
+            Manager manager=new Manager();
+            //System.out.println(manager.getLogin()+" "+manager.getPassword()+" "+accountDto.getLogin()+" "+accountDto.getPassword());
+            if(manager.getLogin().equalsIgnoreCase(accountDto.getLogin()) && manager.getPassword().equalsIgnoreCase(accountDto.getPassword())){
+            DateHandler.manager = new Manager();
+                Stage stage=(Stage) LogIn.getScene().getWindow();
+                stage.close();
+            }
+            else{
+                System.out.println("Manager is not registered");
+            }
+        }
     }
 
 }

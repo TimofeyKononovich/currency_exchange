@@ -46,4 +46,12 @@ public class Client {
     public void setEuros(double euros) {
         this.euros = euros;
     }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getLogin() {
+        return login;
+    }
 }

@@ -12,7 +12,8 @@
 
 <AnchorPane id="MenuBoot" fx:id="First_Window" maxHeight="566.0" maxWidth="639.0" minHeight="566.0" minWidth="639.0" prefHeight="566.0" prefWidth="639.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.currency_exchange.MenuBoot">
    <children>
-      <MenuBar fx:id="MenuBar" blendMode="DARKEN" layoutX="-7.0" prefHeight="566.0" prefWidth="639.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <Label fx:id="Person" layoutX="14.0" layoutY="213.0" prefHeight="40.0" prefWidth="217.0" />
+      <MenuBar fx:id="MenuBar" blendMode="DARKEN" prefHeight="40.0" prefWidth="639.0" AnchorPane.bottomAnchor="526.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <menus>
           <Menu fx:id="As_Manager" mnemonicParsing="false" text="Manager">
             <items>
@@ -32,6 +33,8 @@
             </Menu>
         </menus>
       </MenuBar>
-      <Label fx:id="Person" layoutX="422.0" prefHeight="40.0" prefWidth="217.0" />
+      <Label fx:id="USD" layoutX="320.0" layoutY="40.0" prefHeight="40.0" prefWidth="152.0" />
+      <Label fx:id="RUB" layoutX="320.0" layoutY="80.0" prefHeight="40.0" prefWidth="152.0" />
+      <Label fx:id="EU" layoutX="320.0" layoutY="120.0" prefHeight="40.0" prefWidth="136.0" />
    </children>
 </AnchorPane>

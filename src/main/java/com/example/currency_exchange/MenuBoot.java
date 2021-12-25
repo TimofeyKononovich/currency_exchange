@@ -40,6 +40,15 @@ public class MenuBoot {
     private MenuItem Man_Ex;
 
     @FXML
+    private Label USD;
+
+    @FXML
+    private Label RUB;
+
+    @FXML
+    private Label EU;
+
+    @FXML
     private MenuBar MenuBar;
 
     @FXML
@@ -59,7 +68,9 @@ public class MenuBoot {
 
     @FXML
     void Log_Manager(ActionEvent event) {
-        if(DateHandler.client==null || DateHandler.manager==null){
+
+        if(DateHandler.client==null && DateHandler.manager==null){
+            DateHandler.isManager=true;
         Stage logManagerStage = new Stage();
         logManagerStage.initModality(Modality.APPLICATION_MODAL);
         FXMLLoader logManagerFXMLLoader = new FXMLLoader(getClass().getResource("LoginUser.fxml"));
@@ -77,6 +88,7 @@ public class MenuBoot {
     @FXML
     void OpenList(ActionEvent event) {
         if(DateHandler.manager !=null){
+            Person.setText(DateHandler.manager.getStatus()+" "+DateHandler.manager.getLogin());
         Stage openListStage = new Stage();
         openListStage.initModality(Modality.APPLICATION_MODAL);
         FXMLLoader openListFXMLLoader = new FXMLLoader(getClass().getResource("ExList.fxml"));
@@ -94,12 +106,13 @@ public class MenuBoot {
     @FXML
     void OpenSetting(ActionEvent event) {
         if(DateHandler.manager !=null){
+            Person.setText(DateHandler.manager.getStatus()+" "+DateHandler.manager.getLogin());
         Stage setExchangeValueStage = new Stage();
         setExchangeValueStage.initModality(Modality.APPLICATION_MODAL);
         FXMLLoader setExchangeValueFXMLLoader = new FXMLLoader(getClass().getResource("SetExchangeValue.fxml"));
         Scene setExchangeValueScene= null;
         try {
-            setExchangeValueScene = new Scene(setExchangeValueFXMLLoader.load(), 500,406.0);
+            setExchangeValueScene = new Scene(setExchangeValueFXMLLoader.load(), 500,500.0);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -111,6 +124,10 @@ public class MenuBoot {
     @FXML
     void OpenExchanger(ActionEvent event) {
         if(DateHandler.client !=null ){
+            USD.setText("USD: "+String.format("%.2f",DateHandler.client.getDollars()));
+            RUB.setText("RUB: "+String.format("%.2f",DateHandler.client.getRubles()));
+            EU.setText("EU: "+String.format("%.2f",DateHandler.client.getEuros()));
+            Person.setText(DateHandler.client.getLogin());
         Stage exchangeBarStage = new Stage();
         exchangeBarStage.initModality(Modality.APPLICATION_MODAL);
         FXMLLoader exchangeBarValueFXMLLoader = new FXMLLoader(getClass().getResource("exchangeBar.fxml"));
@@ -127,7 +144,8 @@ public class MenuBoot {
 
     @FXML
     void Client_log(ActionEvent event) {
-        if(DateHandler.client ==null || DateHandler.manager ==null){
+        if(DateHandler.client ==null && DateHandler.manager ==null){
+            DateHandler.isManager=false;
         Stage loginClientStage = new Stage();
         loginClientStage.initModality(Modality.APPLICATION_MODAL);
         FXMLLoader loginClientFXMLLoader = new FXMLLoader(getClass().getResource("LoginUser.fxml"));
@@ -171,6 +189,9 @@ public class MenuBoot {
     void ExitClient(ActionEvent event) {
         if(DateHandler.manager==null || DateHandler.client!=null){
             DateHandler.client=null;
+            EU.setText("");
+            USD.setText("");
+            RUB.setText("");
             Person.setText("");
         }
     }
