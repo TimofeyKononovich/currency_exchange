@@ -182,7 +182,7 @@ public class ExchangeBar {
                 usd_above_zero=DateHandler.client.getDollars_rem();
             }
             if(DateHandler.client.getRubles_rem()<0){
-                DateHandler.client.getRubles_rem();
+                rub_above_zero=DateHandler.client.getRubles_rem();
             }else {
                 rub_above_zero=DateHandler.client.getRubles_rem();
             }if(DateHandler.client.getEuros_rem()<0){
