@@ -33,9 +33,6 @@ public class MenuBoot {
     private Label Date;
 
     @FXML
-    private ImageView Images;
-
-    @FXML
     private Button Reload_But;
 
     @FXML
@@ -78,6 +75,9 @@ public class MenuBoot {
     private MenuItem Man_Log;
 
     @FXML
+    private ImageView icon;
+
+    @FXML
     private MenuItem Exchange_list;
 
     @FXML
@@ -91,7 +91,7 @@ public class MenuBoot {
 
     @FXML
     void Change(ActionEvent event) {
-        Date.setText("To day is: "+ LocalDate.now());
+        view();
         if(DateHandler.manager !=null){
             Person.setText(DateHandler.manager.getStatus()+" "+DateHandler.manager.getLogin());
             Stage RemStage = new Stage();
@@ -111,7 +111,7 @@ public class MenuBoot {
 
     @FXML
     void Log_Manager(ActionEvent event) {
-        Date.setText("To day is: "+ LocalDate.now());
+        view();
         if(DateHandler.client==null && DateHandler.manager==null){
             DateHandler.isManager=true;
         Stage logManagerStage = new Stage();
@@ -131,7 +131,7 @@ public class MenuBoot {
 
     @FXML
     void OpenList(ActionEvent event) {
-        Date.setText("To day is: "+ LocalDate.now());
+        view();
         if(DateHandler.manager !=null){
             Person.setText(DateHandler.manager.getStatus()+" "+DateHandler.manager.getLogin());
         Stage openListStage = new Stage();
@@ -151,7 +151,7 @@ public class MenuBoot {
 
     @FXML
     void OpenSetting(ActionEvent event) {
-        Date.setText("To day is: "+ LocalDate.now());
+        view();
         if(DateHandler.manager !=null){
             Person.setText(DateHandler.manager.getStatus()+" "+DateHandler.manager.getLogin());
         Stage setExchangeValueStage = new Stage();
@@ -163,7 +163,7 @@ public class MenuBoot {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        setExchangeValueStage.setTitle("Exvhange configuration");
+        setExchangeValueStage.setTitle("Exchange configuration");
         setExchangeValueStage.setScene(setExchangeValueScene);
         setExchangeValueStage.show();
     }
@@ -171,7 +171,7 @@ public class MenuBoot {
 
     @FXML
     void OpenExchanger(ActionEvent event) {
-        Date.setText("To day is: "+ LocalDate.now());
+        view();
         if(DateHandler.client !=null ){
             USD.setText("USD: "+String.format("%.2f",DateHandler.client.getDollars()));
             RUB.setText("RUB: "+String.format("%.2f",DateHandler.client.getRubles()));
@@ -195,7 +195,7 @@ public class MenuBoot {
 
     @FXML
     void Client_log(ActionEvent event) {
-        Date.setText("To day is: "+ LocalDate.now());
+        view();
         if(DateHandler.client ==null && DateHandler.manager ==null){
             DateHandler.isManager=false;
         Stage loginClientStage = new Stage();
@@ -215,7 +215,7 @@ public class MenuBoot {
 
     @FXML
     void Registrate(ActionEvent event) {
-        Date.setText("To day is: "+ LocalDate.now());
+        view();
         if(DateHandler.client ==null && DateHandler.manager ==null){
         Stage regMenuStage = new Stage();
         regMenuStage.initModality(Modality.APPLICATION_MODAL);
@@ -234,7 +234,7 @@ public class MenuBoot {
 
     @FXML
     void ExitManager(ActionEvent event) {
-        Date.setText("To day is: "+ LocalDate.now());
+        view();
         if(DateHandler.manager!=null || DateHandler.client==null){
             DateHandler.manager=null;
             Person.setText("");
@@ -243,7 +243,7 @@ public class MenuBoot {
 
     @FXML
     void ExitClient(ActionEvent event) {
-        Date.setText("To day is: "+ LocalDate.now());
+        view();
         if(DateHandler.manager==null || DateHandler.client!=null){
             DateHandler.client=null;
             EU.setText("");
@@ -257,7 +257,7 @@ public class MenuBoot {
     }
     @FXML
     void Reload(ActionEvent event) {
-        Date.setText("To day is: "+ LocalDate.now());
+        view();
         if(DateHandler.manager !=null){
             Person.setText(DateHandler.manager.getStatus()+" "+DateHandler.manager.getLogin());
         }
@@ -270,5 +270,18 @@ public class MenuBoot {
                 RUB_rem.setText("RUB remains: "+String.format("%.2f",DateHandler.client.getRubles_rem()));
                 EU_rem.setText("EU remains: "+String.format("%.2f",DateHandler.client.getEuros_rem()));
         }
+    }
+
+    void view(){
+        Image image= null;
+        try {
+            image = new Image(new FileInputStream("D:\\technologic of programming\\currency_exchange\\src\\main\\resources\\com\\example\\currency_exchange\\photo\\cur.jpeg"));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        icon.setImage(image);
+
+        Date.setText("To day is: "+ LocalDate.now());
     }
 }

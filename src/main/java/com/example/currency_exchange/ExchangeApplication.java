@@ -20,7 +20,7 @@ public class ExchangeApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ExchangeApplication.class.getResource("MenuBoot.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 639,566 );
+        Scene scene = new Scene(fxmlLoader.load(), 639,560 );
         stage.setTitle("Currency Exchanger");
         stage.setScene(scene);
         stage.show();

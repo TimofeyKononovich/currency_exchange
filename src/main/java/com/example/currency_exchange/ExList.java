@@ -77,7 +77,6 @@ public class ExList {
             if(Date_field.getText()=="" && Client_field.getText()==""){
                 ResultSet resultSet=statement.executeQuery("SELECT * FROM exhistory");
                 while (resultSet.next()){
-                    System.out.println(resultSet.getString("DayEx")+" "+resultSet.getString("CurIn")+" "+resultSet.getString("CurOut")+" "+resultSet.getString("LoginDate")+" "+resultSet.getDouble("ValueIn")+" "+resultSet.getDouble("ValueOut"));
                     usersData.add(new ExListOfMembers(resultSet.getString("DayEx"),resultSet.getString("CurIn"),resultSet.getString("CurOut"),resultSet.getString("LoginDate"),Double.toString(resultSet.getDouble("ValueIn")),Double.toString(resultSet.getDouble("ValueOut"))));
                 }
                 connection.close();
