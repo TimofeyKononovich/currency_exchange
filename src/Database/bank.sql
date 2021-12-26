@@ -1,5 +1,6 @@
 create database Currency_exchange;
 drop database Currency_exchange;
+drop table remvalue;
 use Currency_exchange;
 create table  members (
 id int not null AUTO_INCREMENT,
@@ -26,7 +27,8 @@ sellRUB double(10,4) NOT NULL,
 sellEU double(10,4) NOT NULL,
 PRIMARY KEY(id)
 );
-
+select * from remvalue;
+select * FROM eXCHANGEvALUE;
 create table remvalue(
 id int not null AUTO_INCREMENT,
 RUB_rem double(10,4) NOT NULL,

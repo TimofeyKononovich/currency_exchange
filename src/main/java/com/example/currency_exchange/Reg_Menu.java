@@ -6,10 +6,7 @@ import com.example.currency_exchange.models.dto.AccountDto;
 import com.example.currency_exchange.models.dto.ClientDto;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -45,9 +42,16 @@ public class Reg_Menu {
         AccountDto accountDto=new AccountDto(Name.getText(),pass.getText());
         try(Connection connection=JDBCSource.getConnection()) {
             Statement statement=connection.createStatement();
-            ResultSet resultSet=statement.executeQuery("SELECT LoginDate, Perpassword FROM members WHERE LoginDate='"+accountDto.getLogin()+"'");
+            ResultSet resultSet=statement.executeQuery("SELECT LoginDate FROM members WHERE LoginDate='"+accountDto.getLogin()+"'");
             if(resultSet.next()==true){
-                System.out.println("Client is already registered");
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Incorrect data");
+                alert.setHeaderText("Account is already existed");
+                alert.setContentText("Enter new login");
+                alert.showAndWait().ifPresent(rs -> {
+                    if (rs == ButtonType.OK) {
+                    }
+                });
             }
             else {
                 resultSet=statement.executeQuery("SELECT  RUB_rem, USD_rem, EU_rem FROM remvalue ORDER BY id DESC LIMIT 1");

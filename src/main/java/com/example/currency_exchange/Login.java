@@ -6,10 +6,7 @@ import com.example.currency_exchange.models.dto.AccountDto;
 import com.example.currency_exchange.models.dto.ClientDto;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -48,16 +45,22 @@ public class Login {
             Statement statement=connection.createStatement();
             ResultSet resultSet=statement.executeQuery("SELECT LoginDate, Perpassword FROM members WHERE LoginDate='"+accountDto.getLogin()+"' AND Perpassword='"+accountDto.getPassword()+"'");
             if(resultSet.next()==false){
-                connection.close();
-                System.out.println("Client is not registered");
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Incorrect data");
+                alert.setHeaderText("This account is not exist");
+                alert.setContentText("Change login/password");
+                alert.showAndWait().ifPresent(rs -> {
+                    if (rs == ButtonType.OK) {
+                    }
+                });
             }
             else {
-            resultSet=statement.executeQuery("SELECT LoginDate, Perpassword, USD, RUB, EU, RUB_rem, USD_rem, EU_rem, DateLogOn FROM members WHERE LoginDate='"+accountDto.getLogin()+"'");
+            resultSet=statement.executeQuery("SELECT LoginDate, Perpassword, USD, RUB, EU, RUB_rem, USD_rem,EU_rem,DateLogOn FROM members WHERE LoginDate='"+accountDto.getLogin()+"'");
             resultSet.next();
             clientDto=new ClientDto(resultSet.getString("Perpassword"), resultSet.getString("LoginDate"),resultSet.getDouble("RUB"),resultSet.getDouble("USD"),resultSet.getDouble("EU"),resultSet.getDouble("RUB_rem"),resultSet.getDouble("USD_rem"),resultSet.getDouble("EU_rem"),resultSet.getString("DateLogOn"));
-            DateHandler.client=new Client(clientDto.getPassword(),clientDto.getLogin(),clientDto.getRubles(),clientDto.getDollars(),clientDto.getEuros(),clientDto.getRubles_rem(),clientDto.getDollars_rem(),clientDto.getEuros_rem(),clientDto.getDateLogOn());
+            DateHandler.client=new Client(clientDto.getPassword(),clientDto.getLogin(),clientDto.getRubles(),clientDto.getDollars(),clientDto.getEuros(), clientDto.getRubles_rem(), clientDto.getDollars_rem(),clientDto.getEuros_rem(),clientDto.getDateLogOn());
             connection.close();
-            Stage stage=(Stage) LogIn.getScene().getWindow();
+            Stage stage= (Stage) LogIn.getScene().getWindow();
             stage.close();
             }
         } catch (SQLException throwables) {
@@ -74,7 +77,14 @@ public class Login {
                 stage.close();
             }
             else{
-                System.out.println("Manager is not registered");
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Incorrect data");
+                alert.setHeaderText("This account is not exist");
+                alert.setContentText("Change login/password");
+                alert.showAndWait().ifPresent(rs -> {
+                    if (rs == ButtonType.OK) {
+                    }
+                });
             }
         }
     }

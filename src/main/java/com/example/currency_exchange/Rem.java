@@ -6,9 +6,7 @@ import com.example.currency_exchange.models.dto.ExchangeValueDto;
 import com.example.currency_exchange.models.dto.RemainDto;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -16,6 +14,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 
 public class Rem {
 
@@ -48,7 +47,8 @@ public class Rem {
 
     @FXML
     void Submition(ActionEvent event) {
-        Reloading(event);
+        try{
+        if(DateHandler.remainValue!=null){
             try(Connection connection=JDBCSource.getConnection()) {
                 Statement statement=connection.createStatement();
                 double USD=Double.valueOf(USD_field.getText())-DateHandler.remainValue.getRem_USD();
@@ -65,12 +65,41 @@ public class Rem {
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
+        }else
+
+        {
+            Reloading(event);
+        }}catch (NumberFormatException e){
+            USD_field.setText("");
+            RUB_field.setText("");
+            EU_field.setText("");
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Incorrect data");
+            alert.setHeaderText("Not number/ Empty Fields/ Less than zero");
+            alert.setContentText("Enter right statements");
+            alert.showAndWait().ifPresent(rs -> {
+                if (rs == ButtonType.OK) {
+                }
+            });
+        }
         }
 
 
 
     @FXML
     void Reloading(ActionEvent event) {
+        try(Connection connection=JDBCSource.getConnection()) {
+            Statement statement=connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT  RUB_rem, USD_rem, EU_rem FROM remvalue ORDER BY id DESC LIMIT 1");
+            if (resultSet.next() == false) {
+                statement.executeUpdate("INSERT INTO remvalue (RUB_rem, USD_rem, EU_rem) VALUES (1000,1000,1000)");
+                statement.executeUpdate("UPDATE members SET RUB_rem=1000, USD_rem=1000, EU_rem=1000, DateLogOn='" + LocalDate.now().toString() + "' WHERE NOT DateLogOn='" + LocalDate.now().toString() + "'");
+            }
+            DateHandler.remainValue = new RemainValue(resultSet.getDouble("RUB_rem"), resultSet.getDouble("USD_rem"), resultSet.getDouble("EU_rem"));
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         RUB_field.setText(Double.toString(DateHandler.remainValue.getRem_RUB()));
         USD_field.setText(Double.toString(DateHandler.remainValue.getRem_USD()));
         EU_field.setText(Double.toString(DateHandler.remainValue.getRem_EU()));
