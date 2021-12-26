@@ -10,10 +10,12 @@ import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DecimalFormat;
 import java.time.LocalDate;
 import java.util.Random;
 
@@ -36,6 +38,15 @@ public class Reg_Menu {
 
     @FXML
     private TextField Name;
+
+
+    Double RandomDouble(double maxValue){
+        Random random=new Random();
+        double rand=random.nextDouble()*maxValue+1;
+        BigDecimal result = new BigDecimal(rand);
+        result = result.setScale(2, BigDecimal.ROUND_DOWN);
+        return result.doubleValue();
+    }
 
     @FXML
     void Registrate(ActionEvent event) {
@@ -61,11 +72,10 @@ public class Reg_Menu {
                 resultSet.next();
                 }
                 DateHandler.remainValue=new RemainValue(resultSet.getDouble("RUB_rem"),resultSet.getDouble("USD_rem"),resultSet.getDouble("EU_rem"));
-                Random random=new Random();
                 double maxValue=10000;
-                double rub=random.nextDouble()*maxValue+1;
-                double usd=random.nextDouble()*maxValue+1;
-                double eu=random.nextDouble()*maxValue+1;
+                double rub=RandomDouble(maxValue);
+                double usd=RandomDouble(maxValue);
+                double eu=RandomDouble(maxValue);
                 statement.executeUpdate("INSERT INTO members (LoginDate, Perpassword, USD, RUB, EU, RUB_rem, USD_rem, EU_rem, DateLogOn) VALUES ('"+accountDto.getLogin()+"', '"+accountDto.getPassword()+"', "+usd+", "+rub+", "+eu+","+1000+","+1000+","+1000+",'"+LocalDate.now().toString()+"')");
                 DateHandler.client =new Client(accountDto.getPassword(),accountDto.getLogin(),rub,usd,eu,DateHandler.remainValue.getRem_RUB(),DateHandler.remainValue.getRem_USD(),DateHandler.remainValue.getRem_EU(), LocalDate.now().toString());
                 connection.close();
@@ -75,6 +85,7 @@ public class Reg_Menu {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+
 
     }
 

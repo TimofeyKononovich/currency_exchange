@@ -15,6 +15,7 @@ import javafx.stage.Stage;
 
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.sql.Connection;
@@ -210,6 +211,9 @@ public class ExchangeBar {
     void ValidationInput(ActionEvent event) {
         try {
             String textIn = Value_In.getText();
+            if(InterValue.getText()==" "){
+            InterValue.setText(String.format("%.2f",InterValue.getText()));
+            }
             double textFieldMoney=Double.valueOf(InterValue.getText());
             double balance;
             double currency;
@@ -239,17 +243,25 @@ public class ExchangeBar {
                 if (Value_Out.getText().equalsIgnoreCase(Value_In.getText())) {
                     OuterValue.setText(String.valueOf(InterValue.getText()));
                 } else {
+                    BigDecimal result;
                     switch (textOut) {
                         case "RUB":
-                            OuterValue.setText(Double.toString(Double.valueOf(InterValue.getText()) * currency / DateHandler.setExchangeBar.getBuyRubles()));
+                            money = DateHandler.client.getRubles();
+                            result = new BigDecimal(Double.valueOf(InterValue.getText()) * currency / DateHandler.setExchangeBar.getBuyRubles());
+                            result = result.setScale(2, BigDecimal.ROUND_DOWN);
+                            OuterValue.setText(result.toString());
                             break;
                         case "USD":
                             money = DateHandler.client.getDollars();
-                            OuterValue.setText(Double.toString(Double.valueOf(InterValue.getText()) * currency / DateHandler.setExchangeBar.getBuyDollars()));
+                            result = new BigDecimal(Double.valueOf(InterValue.getText()) * currency / DateHandler.setExchangeBar.getBuyDollars());
+                            result = result.setScale(2, BigDecimal.ROUND_DOWN);
+                            OuterValue.setText(result.toString());
                             break;
                         case "EU":
                             money = DateHandler.client.getEuros();
-                            OuterValue.setText(Double.toString(Double.valueOf(InterValue.getText()) * currency / DateHandler.setExchangeBar.getBuyEuoros()));
+                            result = new BigDecimal(Double.valueOf(InterValue.getText()) * currency / DateHandler.setExchangeBar.getBuyEuoros());
+                            result = result.setScale(2, BigDecimal.ROUND_DOWN);
+                            OuterValue.setText(result.toString());
                             break;
                         default:
                             OuterValue.setText("");

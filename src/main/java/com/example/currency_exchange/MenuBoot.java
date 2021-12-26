@@ -33,7 +33,10 @@ public class MenuBoot {
     private Label Date;
 
     @FXML
-    private Button Reload_But;
+    private MenuItem Reload_But;
+
+    @FXML
+    private Menu Reload_Menu;
 
     @FXML
     private MenuItem Exchange;
