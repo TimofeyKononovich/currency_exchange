@@ -11,8 +11,11 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 
 public class ExchangeApplication extends Application {
+
+
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(ExchangeApplication.class.getResource("MenuBoot.fxml"));
@@ -24,6 +27,13 @@ public class ExchangeApplication extends Application {
     }
 
     public static void main(String[] args) {
+        try(Connection connection=JDBCSource.getConnection()) {
+            Statement statement=connection.createStatement();
+            statement.executeUpdate("UPDATE members SET RUB_rem=1000, USD_rem=1000, EU_rem=1000, DateLogOn='"+LocalDate.now().toString()+"' WHERE NOT DateLogOn='"+LocalDate.now().toString()+"'");
+            connection.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
         launch();
     }
 }

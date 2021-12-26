@@ -8,6 +8,10 @@ Perpassword varchar(255) NOT NULL,
 USD double(10,4) NOT NULL,
 RUB double(10,4) NOT NULL,
 EU double(10,4) NOT NULL,
+RUB_rem double(10,4) NOT NULL,
+USD_rem double(10,4) NOT NULL,
+EU_rem double(10,4) NOT NULL,
+DateLogOn varchar(255) NOT NULL,
 PRIMARY KEY(id), 
 CONSTRAINT UC_PERSON UNIQUE (id,LoginDate, Perpassword)
 );
@@ -22,7 +26,7 @@ sellRUB double(10,4) NOT NULL,
 sellEU double(10,4) NOT NULL,
 PRIMARY KEY(id)
 );
-drop table ExHistory;
+drop table members;
 create table ExHistory (
 id int not null auto_increment,
 LoginDate varchar(255) NOT NULL,

@@ -30,10 +30,8 @@ public class ExList {
 
     @FXML
     private TableColumn<ExListOfMembers, String> Col_Name;
-
     @FXML
     private TableColumn<ExListOfMembers, String> Col_in;
-
     @FXML
     private Label Date_label;
 
@@ -41,13 +39,13 @@ public class ExList {
     private AnchorPane ExList;
 
     @FXML
-    private TableColumn<ExListOfMembers, Double> ValueIn;
+    private TableColumn<ExListOfMembers, String> ValueIn;
 
     @FXML
-    private TableColumn<ExListOfMembers, String> Col_from;
+    private TableColumn<ExListOfMembers, String> Col_from;;
 
     @FXML
-    private TableColumn<ExListOfMembers, Double> ValueOut;
+    private TableColumn<ExListOfMembers, String> ValueOut;
 
     @FXML
     private TextField Date_field;
@@ -62,46 +60,58 @@ public class ExList {
     private TextField Client_field;
 
     @FXML
+    private Button Clear_But;
+
+    @FXML
+    void ClearTable(ActionEvent event) {
+        table.getItems().clear();
+    }
+
+    @FXML
     void DisplayInfo(ActionEvent event) {
-        Col_Name.setCellValueFactory(new PropertyValueFactory<ExListOfMembers, String>("login"));
-        Col_Date.setCellValueFactory(new PropertyValueFactory<ExListOfMembers, String>("date"));
-        Col_from.setCellValueFactory(new PropertyValueFactory<ExListOfMembers, String>("vIn"));
-        Col_in.setCellValueFactory(new PropertyValueFactory<ExListOfMembers, String>("vOut"));
-        ValueOut.setCellValueFactory(new PropertyValueFactory<ExListOfMembers, Double>("CurIn"));
-        ValueIn.setCellValueFactory(new PropertyValueFactory<ExListOfMembers, Double>("CurOut"));
+        table.getItems().clear();
         try(Connection connection =JDBCSource.getConnection()) {
             Statement statement=connection.createStatement();
+            String manyDate=Date_field.getText().replaceAll(", ","' OR DayEx='");
+            String manyClient=Client_field.getText().replaceAll(", ","' OR LoginDate='");
             if(Date_field.getText()=="" && Client_field.getText()==""){
                 ResultSet resultSet=statement.executeQuery("SELECT * FROM exhistory");
                 while (resultSet.next()){
-                    usersData.add(new ExListOfMembers(resultSet.getString("DayEx"),resultSet.getString("CurIn"),resultSet.getString("CurOut"),resultSet.getString("LoginDate"),resultSet.getDouble("ValueIn"),resultSet.getDouble("ValueOut")));
+                    System.out.println(resultSet.getString("DayEx")+" "+resultSet.getString("CurIn")+" "+resultSet.getString("CurOut")+" "+resultSet.getString("LoginDate")+" "+resultSet.getDouble("ValueIn")+" "+resultSet.getDouble("ValueOut"));
+                    usersData.add(new ExListOfMembers(resultSet.getString("DayEx"),resultSet.getString("CurIn"),resultSet.getString("CurOut"),resultSet.getString("LoginDate"),Double.toString(resultSet.getDouble("ValueIn")),Double.toString(resultSet.getDouble("ValueOut"))));
                 }
                 connection.close();
 
             }
             if(Date_field.getText()=="" && Client_field.getText()!=""){
-                ResultSet resultSet=statement.executeQuery("SELECT * FROM exhistory WHERE LoginDate='"+Client_field.getText()+"'");
+                ResultSet resultSet=statement.executeQuery("SELECT * FROM exhistory WHERE LoginDate='"+manyClient+"'");
                 while (resultSet.next()){
-                    usersData.add(new ExListOfMembers(resultSet.getString("DayEx"),resultSet.getString("CurIn"),resultSet.getString("CurOut"),resultSet.getString("LoginDate"),resultSet.getDouble("ValueIn"),resultSet.getDouble("ValueOut")));
+                    usersData.add(new ExListOfMembers(resultSet.getString("DayEx"),resultSet.getString("CurIn"),resultSet.getString("CurOut"),resultSet.getString("LoginDate"),Double.toString(resultSet.getDouble("ValueIn")),Double.toString(resultSet.getDouble("ValueOut"))));
                 }
                 connection.close();
 
             }
             if(Date_field.getText()!="" && Client_field.getText()==""){
-                ResultSet resultSet=statement.executeQuery("SELECT * FROM exhistory WHERE DayEx='"+Date_field.getText()+"'");
+                ResultSet resultSet=statement.executeQuery("SELECT * FROM exhistory WHERE DayEx='"+manyDate+"'");
                 while (resultSet.next()){
-                    usersData.add(new ExListOfMembers(resultSet.getString("DayEx"),resultSet.getString("CurIn"),resultSet.getString("CurOut"),resultSet.getString("LoginDate"),resultSet.getDouble("ValueIn"),resultSet.getDouble("ValueOut")));
+                    usersData.add(new ExListOfMembers(resultSet.getString("DayEx"),resultSet.getString("CurIn"),resultSet.getString("CurOut"),resultSet.getString("LoginDate"),Double.toString(resultSet.getDouble("ValueIn")),Double.toString(resultSet.getDouble("ValueOut"))));
                 }
                 connection.close();
 
             }if(Date_field.getText()!="" && Client_field.getText()!=""){
-                ResultSet resultSet=statement.executeQuery("SELECT * FROM exhistory WHERE LoginDate='"+Client_field.getText()+"' DayEx='"+Date_field.getText()+"'");
+                ResultSet resultSet=statement.executeQuery("SELECT * FROM exhistory WHERE LoginDate='"+manyClient+"' AND DayEx='"+manyDate+"'");
                 while (resultSet.next()){
-                    usersData.add(new ExListOfMembers(resultSet.getString("DayEx"),resultSet.getString("CurIn"),resultSet.getString("CurOut"),resultSet.getString("LoginDate"),resultSet.getDouble("ValueIn"),resultSet.getDouble("ValueOut")));
+                    usersData.add(new ExListOfMembers(resultSet.getString("DayEx"),resultSet.getString("CurIn"),resultSet.getString("CurOut"),resultSet.getString("LoginDate"),Double.toString(resultSet.getDouble("ValueIn")),Double.toString(resultSet.getDouble("ValueOut"))));
                 }
                 connection.close();
 
             }
+            Col_Name.setCellValueFactory(data -> data.getValue().loginProperty());
+            Col_Date.setCellValueFactory(data -> data.getValue().dateProperty());
+            Col_from.setCellValueFactory(data -> data.getValue().vInProperty());
+            Col_in.setCellValueFactory(data -> data.getValue().vOutProperty());
+            ValueOut.setCellValueFactory(data -> data.getValue().curInProperty());
+            ValueIn.setCellValueFactory(data -> data.getValue().curFromProperty());
             table.setItems(usersData);
         } catch (SQLException throwables) {
             throwables.printStackTrace();

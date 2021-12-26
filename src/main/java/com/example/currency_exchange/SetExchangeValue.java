@@ -86,7 +86,6 @@ public class SetExchangeValue {
                 Statement statement=connection.createStatement();
                 ResultSet resultSet=statement.executeQuery("SELECT  buyUSD, buyRUB, buyEU, sellUSD, sellRUB, sellEU FROM exchangevalue ORDER BY id DESC LIMIT 1");
                 resultSet.next();
-                System.out.println(resultSet.getDouble("buyRUB")+" "+resultSet.getDouble("sellRUB")+" "+resultSet.getDouble("buyUSD")+" "+resultSet.getDouble("sellUSD")+" "+resultSet.getDouble("buyEU")+" "+resultSet.getDouble("sellEU"));
                 DateHandler.setExchangeBar=new SetExchangeBar(resultSet.getDouble("buyRUB"),resultSet.getDouble("sellRUB"),resultSet.getDouble("buyUSD"),resultSet.getDouble("sellUSD"),resultSet.getDouble("buyEU"),resultSet.getDouble("sellEU"));
             } catch (SQLException throwables) {
                 throwables.printStackTrace();

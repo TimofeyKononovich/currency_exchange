@@ -6,17 +6,37 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class MenuBoot {
+
+    @FXML
+    private Label RUB_rem;
+
+    @FXML
+    private Label EU_rem;
+
+    @FXML
+    private Label USD_rem;
+
+    @FXML
+    private Label Date;
+
+    @FXML
+    private ImageView Images;
+
+    @FXML
+    private Button Reload_But;
 
     @FXML
     private MenuItem Exchange;
@@ -68,6 +88,7 @@ public class MenuBoot {
 
     @FXML
     void Log_Manager(ActionEvent event) {
+        Date.setText("To day is: "+ LocalDate.now());
         if(DateHandler.client==null && DateHandler.manager==null){
             DateHandler.isManager=true;
         Stage logManagerStage = new Stage();
@@ -86,6 +107,7 @@ public class MenuBoot {
 
     @FXML
     void OpenList(ActionEvent event) {
+        Date.setText("To day is: "+ LocalDate.now());
         if(DateHandler.manager !=null){
             Person.setText(DateHandler.manager.getStatus()+" "+DateHandler.manager.getLogin());
         Stage openListStage = new Stage();
@@ -104,6 +126,7 @@ public class MenuBoot {
 
     @FXML
     void OpenSetting(ActionEvent event) {
+        Date.setText("To day is: "+ LocalDate.now());
         if(DateHandler.manager !=null){
             Person.setText(DateHandler.manager.getStatus()+" "+DateHandler.manager.getLogin());
         Stage setExchangeValueStage = new Stage();
@@ -122,6 +145,7 @@ public class MenuBoot {
 
     @FXML
     void OpenExchanger(ActionEvent event) {
+        Date.setText("To day is: "+ LocalDate.now());
         if(DateHandler.client !=null ){
             USD.setText("USD: "+String.format("%.2f",DateHandler.client.getDollars()));
             RUB.setText("RUB: "+String.format("%.2f",DateHandler.client.getRubles()));
@@ -138,11 +162,13 @@ public class MenuBoot {
         }
         exchangeBarStage.setScene(exchangeBarScene);
         exchangeBarStage.show();
+
     }
     }
 
     @FXML
     void Client_log(ActionEvent event) {
+        Date.setText("To day is: "+ LocalDate.now());
         if(DateHandler.client ==null && DateHandler.manager ==null){
             DateHandler.isManager=false;
         Stage loginClientStage = new Stage();
@@ -161,6 +187,7 @@ public class MenuBoot {
 
     @FXML
     void Registrate(ActionEvent event) {
+        Date.setText("To day is: "+ LocalDate.now());
         if(DateHandler.client ==null && DateHandler.manager ==null){
         Stage regMenuStage = new Stage();
         regMenuStage.initModality(Modality.APPLICATION_MODAL);
@@ -178,6 +205,7 @@ public class MenuBoot {
 
     @FXML
     void ExitManager(ActionEvent event) {
+        Date.setText("To day is: "+ LocalDate.now());
         if(DateHandler.manager!=null || DateHandler.client==null){
             DateHandler.manager=null;
             Person.setText("");
@@ -186,12 +214,32 @@ public class MenuBoot {
 
     @FXML
     void ExitClient(ActionEvent event) {
+        Date.setText("To day is: "+ LocalDate.now());
         if(DateHandler.manager==null || DateHandler.client!=null){
             DateHandler.client=null;
             EU.setText("");
             USD.setText("");
             RUB.setText("");
+            EU_rem.setText("");
+            USD_rem.setText("");
+            RUB_rem.setText("");
             Person.setText("");
+        }
+    }
+    @FXML
+    void Reload(ActionEvent event) {
+        Date.setText("To day is: "+ LocalDate.now());
+        if(DateHandler.manager !=null){
+            Person.setText(DateHandler.manager.getStatus()+" "+DateHandler.manager.getLogin());
+        }
+        if(DateHandler.client !=null){
+            Person.setText(DateHandler.client.getLogin());
+                USD.setText("USD: "+String.format("%.2f",DateHandler.client.getDollars()));
+                RUB.setText("RUB: "+String.format("%.2f",DateHandler.client.getRubles()));
+                EU.setText("EU: "+String.format("%.2f",DateHandler.client.getEuros()));
+                USD_rem.setText("USD remains: "+String.format("%.2f",DateHandler.client.getDollars_rem()));
+                RUB_rem.setText("RUB remains: "+String.format("%.2f",DateHandler.client.getRubles_rem()));
+                EU_rem.setText("EU remains: "+String.format("%.2f",DateHandler.client.getEuros_rem()));
         }
     }
 }

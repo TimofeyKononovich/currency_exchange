@@ -25,6 +25,6 @@
       <Label fx:id="Label_out" layoutX="408.0" layoutY="118.0" text="Value Out" />
       <TextField fx:id="InterValue" layoutX="42.0" layoutY="230.0" onAction="#ValidationInput" />
       <TextField fx:id="OuterValue" editable="false" layoutX="348.0" layoutY="230.0" />
-      <Button fx:id="Ex_But" layoutX="259.0" layoutY="301.0" mnemonicParsing="false" onAction="#Exchanging" text="Exchange" />
+      <Button fx:id="Ex_But" layoutX="247.0" layoutY="302.0" mnemonicParsing="false" onAction="#Exchanging" text="Exchange" />
    </children>
 </AnchorPane>

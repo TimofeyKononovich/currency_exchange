@@ -1,6 +1,7 @@
 package com.example.currency_exchange;
 
 import com.example.currency_exchange.models.SetExchangeBar;
+import javafx.beans.binding.When;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -10,13 +11,17 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 
 public class ExchangeBar {
+
+
 
     @FXML
     private MenuItem EU_In;
@@ -67,142 +72,157 @@ public class ExchangeBar {
     @FXML
     void DollarsIn(ActionEvent event) {
         Value_In.setText(USD_In.getText());
-        InterValue.setText("");
+        ValidationInput(event);
     }
 
     @FXML
     void RublesIn(ActionEvent event) {
         Value_In.setText(RUB_In.getText());
-        InterValue.setText("");
+        ValidationInput(event);
     }
 
     @FXML
     void EourosIn(ActionEvent event) {
         Value_In.setText(EU_In.getText());
-        InterValue.setText("");
+        ValidationInput(event);
+
     }
 
     @FXML
     void DollarsOut(ActionEvent event) {
         Value_Out.setText(USD_Out.getText());
-        OuterValue.setText("");
+        ValidationInput(event);
+
     }
 
     @FXML
     void RubblesOut(ActionEvent event) {
         Value_Out.setText(RUB_Out.getText());
-        OuterValue.setText("");
+        ValidationInput(event);
     }
 
     @FXML
     void EourosOut(ActionEvent event) {
         Value_Out.setText(EU_Out.getText());
-        OuterValue.setText("");
+        ValidationInput(event);
     }
 
     @FXML
     void Exchanging(ActionEvent event) {
-        try (Connection connection=JDBCSource.getConnection()) {
-            Statement statement=connection.createStatement();
-            ResultSet resultSet=statement.executeQuery("SELECT  buyUSD, buyRUB, buyEU, sellUSD, sellRUB, sellEU FROM exchangevalue ORDER BY id DESC LIMIT 1");
-            resultSet.next();
-            System.out.println(resultSet.getDouble("buyRUB")+" "+resultSet.getDouble("sellRUB")+" "+resultSet.getDouble("buyUSD")+" "+resultSet.getDouble("sellUSD")+" "+resultSet.getDouble("buyEU")+" "+resultSet.getDouble("sellEU"));
-            DateHandler.setExchangeBar=new SetExchangeBar(resultSet.getDouble("buyRUB"),resultSet.getDouble("sellRUB"),resultSet.getDouble("buyUSD"),resultSet.getDouble("sellUSD"),resultSet.getDouble("buyEU"),resultSet.getDouble("sellEU"));
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
-        }
-        switch (Value_In.getText()){
+        ValidationInput(event);
+        String textOut = Value_Out.getText();
+        String textIn = Value_In.getText();
+        switch (textIn) {
             case "RUB":
-
-                break;
-            case "USD":
-
-                break;
-            case "EU":
-
-                break;
-            default:
-                break;
-        }
-        switch (Value_Out.getText()){
-            case "RUB":
+                DateHandler.client.setRubles_rem(DateHandler.client.getRubles_rem()-Double.valueOf(InterValue.getText()));
                 DateHandler.client.setRubles(DateHandler.client.getRubles()-Double.valueOf(InterValue.getText()));
                 break;
             case "USD":
-
+                DateHandler.client.setDollars_rem(DateHandler.client.getDollars_rem()-Double.valueOf(InterValue.getText()));
+                DateHandler.client.setDollars(DateHandler.client.getDollars()-Double.valueOf(InterValue.getText()));
                 break;
             case "EU":
-
+                DateHandler.client.setEuros_rem(DateHandler.client.getEuros_rem()-Double.valueOf(InterValue.getText()));
+                DateHandler.client.setEuros(DateHandler.client.getEuros()-Double.valueOf(InterValue.getText()));
                 break;
-            default:
-                break;
+            default:{
+                Stage stage =(Stage) Ex_But.getScene().getWindow();
+                stage.close();
+            }
         }
-
+        switch (textOut) {
+            case "RUB":
+                DateHandler.client.setRubles(DateHandler.client.getRubles()+Double.valueOf(OuterValue.getText()));
+                break;
+            case "USD":
+                DateHandler.client.setDollars(DateHandler.client.getDollars()+Double.valueOf(OuterValue.getText()));
+                break;
+            case "EU":
+                DateHandler.client.setEuros(DateHandler.client.getEuros()+Double.valueOf(OuterValue.getText()));
+                break;
+            default:{
+                Stage stage =(Stage) Ex_But.getScene().getWindow();
+                stage.close();
+            }
+        }
+        try(Connection connection=JDBCSource.getConnection()) {
+            Statement statement=connection.createStatement();
+            statement.executeUpdate("UPDATE members SET RUB_rem="+DateHandler.client.getRubles_rem()+", USD_rem="+DateHandler.client.getDollars_rem()+", EU_rem="+DateHandler.client.getDollars_rem()+", RUB="+DateHandler.client.getRubles()+",USD="+DateHandler.client.getDollars()+",EU="+DateHandler.client.getEuros()+" WHERE LoginDate='"+DateHandler.client.getLogin()+"'");
+            statement.executeUpdate("INSERT INTO exhistory (LoginDate, ValueIn, CurIn, CurOut, ValueOut, DayEx) VALUES ('"+DateHandler.client.getLogin()+"', "+Double.valueOf(InterValue.getText())+", '"+textIn+"', '"+textOut+"', "+Double.valueOf(OuterValue.getText())+", '"+LocalDate.now().toString()+"')");
+            connection.close();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
-
 
     @FXML
     void ValidationInput(ActionEvent event) {
         if(DateHandler.setExchangeBar==null){
-        try (Connection connection=JDBCSource.getConnection()) {
-            Statement statement=connection.createStatement();
-            ResultSet resultSet=statement.executeQuery("SELECT  buyUSD, buyRUB, buyEU, sellUSD, sellRUB, sellEU FROM exchangevalue ORDER BY id DESC LIMIT 1");
-            resultSet.next();
-            System.out.println(resultSet.getDouble("buyRUB")+" "+resultSet.getDouble("sellRUB")+" "+resultSet.getDouble("buyUSD")+" "+resultSet.getDouble("sellUSD")+" "+resultSet.getDouble("buyEU")+" "+resultSet.getDouble("sellEU"));
-            DateHandler.setExchangeBar=new SetExchangeBar(resultSet.getDouble("buyRUB"),resultSet.getDouble("sellRUB"),resultSet.getDouble("buyUSD"),resultSet.getDouble("sellUSD"),resultSet.getDouble("buyEU"),resultSet.getDouble("sellEU"));
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+            try (Connection connection=JDBCSource.getConnection()) {
+                Statement statement=connection.createStatement();
+                ResultSet resultSet=statement.executeQuery("SELECT  buyUSD, buyRUB, buyEU, sellUSD, sellRUB, sellEU FROM exchangevalue ORDER BY id DESC LIMIT 1");
+                resultSet.next();
+                DateHandler.setExchangeBar=new SetExchangeBar(resultSet.getDouble("buyRUB"),resultSet.getDouble("sellRUB"),resultSet.getDouble("buyUSD"),resultSet.getDouble("sellUSD"),resultSet.getDouble("buyEU"),resultSet.getDouble("sellEU"));
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
         }
-        }
-        String textIn=Value_In.getText();
-        double currency;
-        double money;
-        switch (textIn){
-            case "RUB":
-                money=DateHandler.client.getRubles();
-                currency=DateHandler.setExchangeBar.getSellRubles();
-                break;
-            case "USD":
-                money=DateHandler.client.getDollars();
-                currency=DateHandler.setExchangeBar.getSellDollars();
-                break;
-            case "EU":
-                money=DateHandler.client.getEuros();
-                currency=DateHandler.setExchangeBar.getSellEuoros();
-                break;
-            default:
-                InterValue.setText("Choose currency");
-                currency=0;
-                money=0;
-                break;
-        }
-        System.out.println(money+" "+textIn);
-        if(Double.valueOf(InterValue.getText())>0 && money>Double.valueOf(InterValue.getText())){
-            String textOut=Value_Out.getText();
-            if(Value_Out.getText().equalsIgnoreCase(Value_In.getText())){
-                System.out.println("Work");
-                OuterValue.setText(String.valueOf(InterValue.getText()));
-            }else{
-            switch (textOut){
+        try {
+            String textIn = Value_In.getText();
+            double textFieldMoney=Double.valueOf(InterValue.getText());
+            double balance;
+            double currency;
+            double money;
+            switch (textIn) {
                 case "RUB":
-                    OuterValue.setText(Double.toString(Double.valueOf(InterValue.getText())*currency/DateHandler.setExchangeBar.getBuyRubles()));
+                    money = DateHandler.client.getRubles();
+                    currency = DateHandler.setExchangeBar.getSellRubles();
+                    balance=DateHandler.client.getRubles_rem();
                     break;
                 case "USD":
-                    money=DateHandler.client.getDollars();
-                    OuterValue.setText(Double.toString(Double.valueOf(InterValue.getText())*currency/DateHandler.setExchangeBar.getBuyDollars()));
+                    money = DateHandler.client.getDollars();
+                    currency = DateHandler.setExchangeBar.getSellDollars();
+                    balance=DateHandler.client.getDollars_rem();
                     break;
                 case "EU":
-                    money=DateHandler.client.getEuros();
-                    OuterValue.setText(Double.toString(Double.valueOf(InterValue.getText())*currency/DateHandler.setExchangeBar.getBuyEuoros()));
+                    money = DateHandler.client.getEuros();
+                    currency = DateHandler.setExchangeBar.getSellEuoros();
+                    balance=DateHandler.client.getEuros_rem();
                     break;
                 default:
-                    OuterValue.setText("Choose currency");
-                    break;
+                    InterValue.setText("");
+                    throw new NumberFormatException();
             }
+            if (textFieldMoney > 0 && money >= textFieldMoney && balance>=textFieldMoney) {
+                String textOut = Value_Out.getText();
+                if (Value_Out.getText().equalsIgnoreCase(Value_In.getText())) {
+                    OuterValue.setText(String.valueOf(InterValue.getText()));
+                } else {
+                    switch (textOut) {
+                        case "RUB":
+                            OuterValue.setText(Double.toString(Double.valueOf(InterValue.getText()) * currency / DateHandler.setExchangeBar.getBuyRubles()));
+                            break;
+                        case "USD":
+                            money = DateHandler.client.getDollars();
+                            OuterValue.setText(Double.toString(Double.valueOf(InterValue.getText()) * currency / DateHandler.setExchangeBar.getBuyDollars()));
+                            break;
+                        case "EU":
+                            money = DateHandler.client.getEuros();
+                            OuterValue.setText(Double.toString(Double.valueOf(InterValue.getText()) * currency / DateHandler.setExchangeBar.getBuyEuoros()));
+                            break;
+                        default:
+                            OuterValue.setText("");
+                            throw new NumberFormatException();
+                    }
+                }
+            } else {
+                throw new NumberFormatException();
             }
-        }else{
-            OuterValue.setText("Incorrect Number");
+        } catch (NumberFormatException e) {
+            InterValue.setText("");
+            OuterValue.setText("");
         }
+
     }
 
 

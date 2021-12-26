@@ -8,10 +8,13 @@ public class Manager {
 
     private static String Password="1";
 
+
+
     private boolean isManger = true;
 
     public Manager() {
     }
+
 
     public String getLogin() {
         return Login;

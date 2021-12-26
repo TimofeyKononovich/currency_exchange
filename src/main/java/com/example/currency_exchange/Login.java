@@ -52,10 +52,10 @@ public class Login {
                 System.out.println("Client is not registered");
             }
             else {
-            resultSet=statement.executeQuery("SELECT LoginDate, Perpassword, USD, RUB, EU FROM members WHERE LoginDate='"+accountDto.getLogin()+"'");
+            resultSet=statement.executeQuery("SELECT LoginDate, Perpassword, USD, RUB, EU, RUB_rem, USD_rem, EU_rem, DateLogOn FROM members WHERE LoginDate='"+accountDto.getLogin()+"'");
             resultSet.next();
-            clientDto=new ClientDto(resultSet.getString("Perpassword"), resultSet.getString("LoginDate"),resultSet.getDouble("RUB"),resultSet.getDouble("USD"),resultSet.getDouble("EU"));
-            DateHandler.client=new Client(clientDto.getPassword(),clientDto.getLogin(),clientDto.getRubles(),clientDto.getDollars(),clientDto.getEuros());
+            clientDto=new ClientDto(resultSet.getString("Perpassword"), resultSet.getString("LoginDate"),resultSet.getDouble("RUB"),resultSet.getDouble("USD"),resultSet.getDouble("EU"),resultSet.getDouble("RUB_rem"),resultSet.getDouble("USD_rem"),resultSet.getDouble("EU_rem"),resultSet.getString("DateLogOn"));
+            DateHandler.client=new Client(clientDto.getPassword(),clientDto.getLogin(),clientDto.getRubles(),clientDto.getDollars(),clientDto.getEuros(),clientDto.getRubles_rem(),clientDto.getDollars_rem(),clientDto.getEuros_rem(),clientDto.getDateLogOn());
             connection.close();
             Stage stage=(Stage) LogIn.getScene().getWindow();
             stage.close();

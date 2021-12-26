@@ -1,67 +1,101 @@
 package com.example.currency_exchange.models;
 
-public class ExListOfMembers {
-    private String date;
-    private String vIn;
-    private String vOut;
-    private String login;
-    private double curFrom;
-    private double curIn;
+import javafx.beans.property.DoubleProperty;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
-    public ExListOfMembers(String date, String vIn, String vOut, String login, double curFrom, double curIn) {
-        this.date = date;
-        this.vIn = vIn;
-        this.vOut = vOut;
-        this.login = login;
-        this.curFrom = curFrom;
-        this.curIn = curIn;
+import java.math.BigDecimal;
+
+public class ExListOfMembers {
+    private StringProperty date;
+    private StringProperty vIn;
+    private StringProperty vOut;
+    private StringProperty login;
+    private StringProperty curFrom;
+    private StringProperty curIn;
+
+    public ExListOfMembers(String date, String vIn, String vOut, String login, String curFrom, String curIn) {
+        this.date = new SimpleStringProperty(date);
+        this.vIn = new SimpleStringProperty(vIn);
+        this.vOut = new SimpleStringProperty(vOut);
+        this.login = new SimpleStringProperty(login);
+        this.curFrom = new SimpleStringProperty(curFrom);
+        this.curIn = new SimpleStringProperty(curIn);
     }
 
     public String getDate() {
-        return date;
+        return this.date.get();
     }
 
     public void setDate(String date) {
-        this.date = date;
+        this.date.set(date);
+    }
+
+    public StringProperty dateProperty(){
+        return this.date;
     }
 
     public String getvIn() {
-        return vIn;
+        return this.vIn.get();
     }
 
     public void setvIn(String vIn) {
-        this.vIn = vIn;
+        this.vIn.set(vIn);
+    }
+
+
+    public StringProperty vInProperty(){
+        return this.vIn;
     }
 
     public String getvOut() {
-        return vOut;
+        return this.vOut.get();
     }
 
     public void setvOut(String vOut) {
-        this.vOut = vOut;
+        this.vOut.set(vOut);
+    }
+
+
+    public StringProperty vOutProperty(){
+        return this.vOut;
     }
 
     public String getLogin() {
-        return login;
+        return this.login.get();
     }
 
     public void setLogin(String login) {
-        this.login = login;
+        this.login.set(login);
     }
 
-    public double getCurFrom() {
-        return curFrom;
+    public StringProperty loginProperty(){
+        return this.login;
     }
 
-    public void setCurFrom(double curFrom) {
-        this.curFrom = curFrom;
+    public String getCurFrom() {
+        return this.curFrom.get();
     }
 
-    public double getCurIn() {
-        return curIn;
+    public void setCurFrom(String curFrom) {
+        this.curFrom.set(curFrom);
     }
 
-    public void setCurIn(double curIn) {
-        this.curIn = curIn;
+
+    public StringProperty curFromProperty(){
+        return this.curFrom;
+    }
+
+    public String getCurIn() {
+        return this.curIn.get();
+    }
+
+    public void setCurIn(String curIn) {
+        this.curIn.set(curIn);
+    }
+
+    public StringProperty curInProperty(){
+        return this.curIn;
     }
 }
