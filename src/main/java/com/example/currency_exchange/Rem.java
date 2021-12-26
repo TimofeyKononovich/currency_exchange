@@ -51,9 +51,9 @@ public class Rem {
         if(DateHandler.remainValue!=null){
             try(Connection connection=JDBCSource.getConnection()) {
                 Statement statement=connection.createStatement();
-                double USD=Double.valueOf(USD_field.getText())-DateHandler.remainValue.getRem_USD();
-                double RUB=Double.valueOf(RUB_field.getText())-DateHandler.remainValue.getRem_RUB();
-                double EU=Double.valueOf(EU_field.getText())-DateHandler.remainValue.getRem_EU();
+                double USD=Double.valueOf(USD_field.getText());
+                double RUB=Double.valueOf(RUB_field.getText());
+                double EU=Double.valueOf(EU_field.getText());
                 statement.executeUpdate("INSERT INTO remvalue (RUB_rem, USD_rem, EU_rem) VALUES ("+Double.valueOf(RUB_field.getText())+", "+Double.valueOf(USD_field.getText())+", "+Double.valueOf(EU_field.getText())+")");
                 statement.executeUpdate("UPDATE members SET RUB_rem=RUB_rem+"+RUB+", USD_rem=USD_rem+"+USD+", EU_rem=EU_rem+"+EU);
                 connection.close();
