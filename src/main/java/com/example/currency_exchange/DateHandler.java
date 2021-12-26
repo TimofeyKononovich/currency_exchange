@@ -2,6 +2,7 @@ package com.example.currency_exchange;
 
 import com.example.currency_exchange.models.Client;
 import com.example.currency_exchange.models.Manager;
+import com.example.currency_exchange.models.RemainValue;
 import com.example.currency_exchange.models.SetExchangeBar;
 import javafx.stage.Stage;
 
@@ -14,5 +15,7 @@ public class DateHandler {
    static SetExchangeBar setExchangeBar;
 
    static Manager manager;
+
+   static RemainValue remainValue;
 
 }

@@ -63,8 +63,8 @@ public class SetExchangeValue {
 
     @FXML
     void Save(ActionEvent event) {
-        if(DateHandler.setExchangeBar!=null){
-            ExchangeValueDto exchangeValueDto=new ExchangeValueDto(Double.valueOf(purchase_RUB.getText()),Double.valueOf(sale_RUB.getText()),Double.valueOf(purchase_USD.getText()),Double.valueOf(sale_USD.getText()),Double.valueOf(EU_purchase.getText()),Double.valueOf(sale_EU.getText()));
+        NewValue(event);
+        ExchangeValueDto exchangeValueDto=new ExchangeValueDto(Double.valueOf(purchase_RUB.getText()),Double.valueOf(sale_RUB.getText()),Double.valueOf(purchase_USD.getText()),Double.valueOf(sale_USD.getText()),Double.valueOf(EU_purchase.getText()),Double.valueOf(sale_EU.getText()));
             try(Connection connection=JDBCSource.getConnection()) {
                 Statement statement=connection.createStatement();
                 statement.executeUpdate("INSERT INTO exchangevalue (buyUSD, buyRUB, buyEU, sellUSD, sellRUB, sellEU) VALUES ("+exchangeValueDto.getBuyDollars()+", "+exchangeValueDto.getBuyRubles()+", "+exchangeValueDto.getBuyEuoros()+", "+exchangeValueDto.getSellDollars()+", "+exchangeValueDto.getSellRubles()+", "+exchangeValueDto.getSellEuoros()+")");
@@ -76,22 +76,10 @@ public class SetExchangeValue {
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
-        }
     }
 
     @FXML
     void NewValue(ActionEvent event) {
-        if(DateHandler.setExchangeBar==null){
-            try (Connection connection=JDBCSource.getConnection()) {
-                Statement statement=connection.createStatement();
-                ResultSet resultSet=statement.executeQuery("SELECT  buyUSD, buyRUB, buyEU, sellUSD, sellRUB, sellEU FROM exchangevalue ORDER BY id DESC LIMIT 1");
-                resultSet.next();
-                DateHandler.setExchangeBar=new SetExchangeBar(resultSet.getDouble("buyRUB"),resultSet.getDouble("sellRUB"),resultSet.getDouble("buyUSD"),resultSet.getDouble("sellUSD"),resultSet.getDouble("buyEU"),resultSet.getDouble("sellEU"));
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
-        }
-        else{
             EU_purchase.setText(Double.toString(DateHandler.setExchangeBar.getBuyEuoros()));
             sale_EU.setText(Double.toString(DateHandler.setExchangeBar.getSellEuoros()));
             purchase_USD.setText(Double.toString(DateHandler.setExchangeBar.getBuyDollars()));
@@ -101,4 +89,4 @@ public class SetExchangeValue {
         }
     }
 
-}
+

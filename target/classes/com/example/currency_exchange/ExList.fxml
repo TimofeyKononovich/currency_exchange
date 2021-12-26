@@ -22,11 +22,11 @@
             </TableView>
          </content>
       </ScrollPane>
-      <Button fx:id="ShowHistory" layoutX="437.0" layoutY="47.0" mnemonicParsing="false" onAction="#DisplayInfo" prefHeight="43.0" prefWidth="126.0" text="Display" />
+      <Button fx:id="ShowHistory" layoutX="437.0" layoutY="53.0" mnemonicParsing="false" onAction="#DisplayInfo" prefHeight="43.0" prefWidth="126.0" text="Display" />
       <TextField fx:id="Date_field" layoutX="144.0" layoutY="37.0" />
       <TextField fx:id="Client_field" layoutX="752.0" layoutY="37.0" />
       <Label fx:id="Date_Label" layoutX="650.0" layoutY="42.0" text="Client" />
       <Label fx:id="Date_label" layoutX="45.0" layoutY="42.0" text="Date" />
-      <Button fx:id="Clear_But" layoutX="467.0" layoutY="6.0" mnemonicParsing="false" onAction="#ClearTable" text="Clear" />
+      <Button fx:id="Clear_But" layoutX="473.0" layoutY="6.0" mnemonicParsing="false" onAction="#ClearTable" text="Clear" />
    </children>
 </AnchorPane>

@@ -15,7 +15,7 @@ DateLogOn varchar(255) NOT NULL,
 PRIMARY KEY(id), 
 CONSTRAINT UC_PERSON UNIQUE (id,LoginDate, Perpassword)
 );
-
+select * from members;
 create table ExchangeValue (
 id int not null AUTO_INCREMENT,
 buyUSD double(10,4) NOT NULL,
@@ -26,7 +26,15 @@ sellRUB double(10,4) NOT NULL,
 sellEU double(10,4) NOT NULL,
 PRIMARY KEY(id)
 );
-drop table members;
+
+create table remvalue(
+id int not null AUTO_INCREMENT,
+RUB_rem double(10,4) NOT NULL,
+USD_rem double(10,4) NOT NULL,
+EU_rem double(10,4) NOT NULL,
+PRIMARY KEY(id)
+);
+drop table ExchangeValue;
 create table ExHistory (
 id int not null auto_increment,
 LoginDate varchar(255) NOT NULL,

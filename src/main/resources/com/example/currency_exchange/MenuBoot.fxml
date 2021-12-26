@@ -22,6 +22,7 @@
               <MenuItem fx:id="Man_Log" mnemonicParsing="false" onAction="#Log_Manager" text="Login as Manager" />
                   <MenuItem fx:id="Exchange_list" mnemonicParsing="false" onAction="#OpenList" text="View Exchange list" />
                   <MenuItem fx:id="Value_set" mnemonicParsing="false" onAction="#OpenSetting" text="Set Exchange value" />
+                  <MenuItem fx:id="ChangeRem" mnemonicParsing="false" onAction="#Change" text="Set remains value" />
                   <MenuItem fx:id="Man_Ex" mnemonicParsing="false" onAction="#ExitManager" text="Exit Manager Account" />
             </items>
           </Menu>

@@ -13,6 +13,10 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -109,6 +113,7 @@ public class ExchangeBar {
 
     @FXML
     void Exchanging(ActionEvent event) {
+        if(InterValue.getText()!="" && OuterValue.getText()!=""){
         ValidationInput(event);
         String textOut = Value_Out.getText();
         String textIn = Value_In.getText();
@@ -149,24 +154,60 @@ public class ExchangeBar {
             Statement statement=connection.createStatement();
             statement.executeUpdate("UPDATE members SET RUB_rem="+DateHandler.client.getRubles_rem()+", USD_rem="+DateHandler.client.getDollars_rem()+", EU_rem="+DateHandler.client.getDollars_rem()+", RUB="+DateHandler.client.getRubles()+",USD="+DateHandler.client.getDollars()+",EU="+DateHandler.client.getEuros()+" WHERE LoginDate='"+DateHandler.client.getLogin()+"'");
             statement.executeUpdate("INSERT INTO exhistory (LoginDate, ValueIn, CurIn, CurOut, ValueOut, DayEx) VALUES ('"+DateHandler.client.getLogin()+"', "+Double.valueOf(InterValue.getText())+", '"+textIn+"', '"+textOut+"', "+Double.valueOf(OuterValue.getText())+", '"+LocalDate.now().toString()+"')");
+            ResultSet resultSet=statement.executeQuery("SELECT id FROM exhistory ORDER BY id DESC LIMIT 1");
+            resultSet.next();
+            PrintIntoFile(textIn,textOut,LocalDate.now(),resultSet.getInt("id"),InterValue.getText(), OuterValue.getText());
             connection.close();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        }
     }
+
+    private void PrintIntoFile(String textIn, String textOut, LocalDate localDate, Integer id, String in, String out) {
+        String pathName="C:\\Users\\User\\Desktop\\tp\\"+DateHandler.client.getLogin();
+        String fileName= pathName+"\\"+textIn+" into "+textOut+" "+localDate.toString()+" "+id.toString()+".txt";
+        try {
+            if(!Files.isDirectory(Path.of(pathName))){
+            Files.createDirectory(Path.of(pathName));
+            }
+            Files.createFile(Path.of(fileName));
+            FileOutputStream fileOutputStream = new FileOutputStream(fileName);
+            Double usd_above_zero;
+            Double rub_above_zero;
+            Double eu_above_zero;
+            if(DateHandler.client.getDollars_rem()<0){
+            usd_above_zero=usd_above_zero=DateHandler.client.getDollars_rem();
+            }else {
+                usd_above_zero=DateHandler.client.getDollars_rem();
+            }
+            if(DateHandler.client.getRubles_rem()<0){
+                DateHandler.client.getRubles_rem();
+            }else {
+                rub_above_zero=DateHandler.client.getRubles_rem();
+            }if(DateHandler.client.getEuros_rem()<0){
+                eu_above_zero=DateHandler.client.getEuros_rem();
+            }else {
+                eu_above_zero=DateHandler.client.getEuros_rem();
+            }
+            String cheque = "Имя клиента: "+DateHandler.client.getLogin()+".       Время: "+localDate.toString()+"."+"\n"+
+                    "---------------------------------------------------------------------------------------------------"+"\n"+
+                    "Валюта, купленная банком: "+textIn+" "+String.format("%.2f",Double.valueOf(in))+"     "+"Валюта, проданная банком: "+textOut+" "+String.format("%.2f",Double.valueOf(out))+"\n"+
+                    "Остаток на счете: USD "+String.format("%.2f",DateHandler.client.getDollars())+"    RUB "+String.format("%.2f",DateHandler.client.getRubles())+"   EU "+String.format("%.2f",DateHandler.client.getEuros())+"\n"+
+                    "Остаток ежедневных обменов: USD "+String.format("%.2f",usd_above_zero)+"    RUB "+String.format("%.2f",rub_above_zero)+"     EU "+String.format("%.2f",eu_above_zero)+"\n"+
+                    "Спасибо, что выбрали услуги нашего пункта обмена валюты!";
+
+            fileOutputStream.write(cheque.getBytes());
+            fileOutputStream.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
 
     @FXML
     void ValidationInput(ActionEvent event) {
-        if(DateHandler.setExchangeBar==null){
-            try (Connection connection=JDBCSource.getConnection()) {
-                Statement statement=connection.createStatement();
-                ResultSet resultSet=statement.executeQuery("SELECT  buyUSD, buyRUB, buyEU, sellUSD, sellRUB, sellEU FROM exchangevalue ORDER BY id DESC LIMIT 1");
-                resultSet.next();
-                DateHandler.setExchangeBar=new SetExchangeBar(resultSet.getDouble("buyRUB"),resultSet.getDouble("sellRUB"),resultSet.getDouble("buyUSD"),resultSet.getDouble("sellUSD"),resultSet.getDouble("buyEU"),resultSet.getDouble("sellEU"));
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
-        }
         try {
             String textIn = Value_In.getText();
             double textFieldMoney=Double.valueOf(InterValue.getText());

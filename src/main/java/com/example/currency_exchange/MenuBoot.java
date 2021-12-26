@@ -84,7 +84,30 @@ public class MenuBoot {
     private MenuItem Exit;
 
     @FXML
+    private MenuItem ChangeRem;
+
+    @FXML
     private Menu Client_int;
+
+    @FXML
+    void Change(ActionEvent event) {
+        Date.setText("To day is: "+ LocalDate.now());
+        if(DateHandler.manager !=null){
+            Person.setText(DateHandler.manager.getStatus()+" "+DateHandler.manager.getLogin());
+            Stage RemStage = new Stage();
+            RemStage.initModality(Modality.APPLICATION_MODAL);
+            FXMLLoader RemFXMLLoader = new FXMLLoader(getClass().getResource("Rem.fxml"));
+            Scene RemScene= null;
+            try {
+                RemScene = new Scene(RemFXMLLoader.load(), 600,406);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            RemStage.setTitle("Change packet");
+            RemStage.setScene( RemScene);
+            RemStage.show();
+        }
+    }
 
     @FXML
     void Log_Manager(ActionEvent event) {
@@ -100,6 +123,7 @@ public class MenuBoot {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        logManagerStage.setTitle("Manager logging");
         logManagerStage.setScene(logManagerScene);
         logManagerStage.show();
         }
@@ -119,6 +143,7 @@ public class MenuBoot {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        openListStage.setTitle("journal");
         openListStage.setScene( openListScene);
         openListStage.show();
     }
@@ -138,6 +163,7 @@ public class MenuBoot {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        setExchangeValueStage.setTitle("Exvhange configuration");
         setExchangeValueStage.setScene(setExchangeValueScene);
         setExchangeValueStage.show();
     }
@@ -160,6 +186,7 @@ public class MenuBoot {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        exchangeBarStage.setTitle("Where is my money!?");
         exchangeBarStage.setScene(exchangeBarScene);
         exchangeBarStage.show();
 
@@ -180,6 +207,7 @@ public class MenuBoot {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        loginClientStage.setTitle("Client logging");
         loginClientStage.setScene(loginClientScene);
         loginClientStage.show();
     }
@@ -198,6 +226,7 @@ public class MenuBoot {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        regMenuStage.setTitle("Registration for client's");
         regMenuStage.setScene(regMenuScene);
         regMenuStage.show();
         }
