@@ -98,7 +98,7 @@ public class ExList {
                 connection.close();
 
             }if(Date_field.getText()!="" && Client_field.getText()!=""){
-                ResultSet resultSet=statement.executeQuery("SELECT * FROM exhistory WHERE LoginDate='"+manyClient+"' AND DayEx='"+manyDate+"'");
+                ResultSet resultSet=statement.executeQuery("SELECT * FROM exhistory WHERE (LoginDate='"+manyClient+"') AND (DayEx='"+manyDate+"')");
                 while (resultSet.next()){
                     usersData.add(new ExListOfMembers(resultSet.getString("DayEx"),resultSet.getString("CurIn"),resultSet.getString("CurOut"),resultSet.getString("LoginDate"),Double.toString(resultSet.getDouble("ValueIn")),Double.toString(resultSet.getDouble("ValueOut"))));
                 }
